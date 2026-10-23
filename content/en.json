@@ -317,5 +317,25 @@
       "aiBadge": "AI",
       "legend": "AI: local GPU or cloud gateway, with automatic failover. Stages run in parallel and resume after failures."
     }
+  },
+  "education": {
+    "title": "Education & certifications",
+    "items": [
+      {
+        "name": "Master’s in Cybersecurity",
+        "org": "ENSA Kénitra",
+        "dates": "2023 to 2025"
+      },
+      {
+        "name": "Bachelor’s in Information Systems and Networks (Licence)",
+        "org": "Ibn Tofail University, Kénitra",
+        "dates": "2021 to 2022"
+      },
+      {
+        "name": "PCAP: Programming Essentials in Python",
+        "org": "Certification",
+        "dates": "2021"
+      }
+    ]
   }
 }
