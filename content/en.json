@@ -337,5 +337,20 @@
         "dates": "2021"
       }
     ]
+  },
+  "contact": {
+    "title": "Contact",
+    "open": "Open to opportunities in Morocco, France and remote.",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    },
+    "githubNote": "Most of my repositories are private.",
+    "cvButton": "Download my CV"
+  },
+  "footer": {
+    "rights": "All rights reserved."
   }
 }

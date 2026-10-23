@@ -1,0 +1,52 @@
+---
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const p = t.profile;
+const c = t.contact;
+const strip = (url) => url.replace(/^https:\/\/(www\.)?/, '');
+---
+<section id="contact" data-nav="contact" class="section" aria-labelledby="contact-title">
+  <div class="wrap reveal">
+    <h2 id="contact-title" class="section-title"><span class="idx" aria-hidden="true">07</span>{c.title}</h2>
+    <p class="open prose">{c.open}</p>
+    <dl class="channels">
+      <div>
+        <dt class="mono">{c.labels.email}</dt>
+        <dd><a href={`mailto:${p.email}`}>{p.email}</a></dd>
+      </div>
+      <div>
+        <dt class="mono">{c.labels.phone}</dt>
+        <dd><a href={`tel:${p.phoneHref}`}>{p.phone}</a></dd>
+      </div>
+      <div>
+        <dt class="mono">{c.labels.linkedin}</dt>
+        <dd><a href={p.linkedin} rel="me">{strip(p.linkedin)}</a></dd>
+      </div>
+      <div>
+        <dt class="mono">{c.labels.github}</dt>
+        <dd><a href={p.github} rel="me">{strip(p.github)}</a> <span class="muted note">{c.githubNote}</span></dd>
+      </div>
+    </dl>
+    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download>
+      {c.cvButton} <span class="hint">({t.hero.cvHint})</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .open { font-size: 1.15rem; }
+  .channels { margin: 1.5rem 0 2rem; max-width: var(--prose); }
+  .channels div {
+    display: grid;
+    gap: 0.1rem 1.5rem;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  dt { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  .note { display: block; font-size: 0.85rem; }
+  .hint { font-weight: 400; opacity: 0.8; }
+  @media (min-width: 40rem) {
+    .channels div { grid-template-columns: 8rem 1fr; align-items: baseline; }
+  }
+</style>

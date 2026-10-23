@@ -337,5 +337,20 @@
         "dates": "2021"
       }
     ]
+  },
+  "contact": {
+    "title": "Contact",
+    "open": "Ouvert aux opportunités au Maroc, en France et en télétravail.",
+    "labels": {
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    },
+    "githubNote": "La plupart de mes dépôts sont privés.",
+    "cvButton": "Télécharger mon CV"
+  },
+  "footer": {
+    "rights": "Tous droits réservés."
   }
 }
