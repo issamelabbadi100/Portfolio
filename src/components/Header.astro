@@ -43,7 +43,7 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
   /* Phone: brand + tools on row one, scrollable section links on row two. */
   .bar {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: 3.5rem auto;
     grid-template-areas: 'brand tools' 'nav nav';
     align-items: center;
@@ -60,6 +60,7 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
   .prompt { color: var(--accent); }
   @media (max-width: 23rem) {
     .prompt { display: none; }
+    .lang-switch { width: 5rem; }
   }
   nav {
     grid-area: nav;
