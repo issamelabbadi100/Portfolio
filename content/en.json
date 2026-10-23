@@ -31,5 +31,30 @@
     "langSwitch": "FR",
     "langSwitchLabel": "Passer en français",
     "themeToggle": "Toggle light and dark theme"
+  },
+  "hero": {
+    "positioning": "Systems engineer with nearly 5 years running critical production infrastructure, specialised in monitoring and observability (Zabbix, Grafana, Prometheus) and GitOps automation.",
+    "cvButton": "Download my CV",
+    "cvHint": "PDF, French",
+    "contactButton": "Get in touch",
+    "techLabel": "Key technologies",
+    "tech": [
+      "Zabbix",
+      "Grafana",
+      "Prometheus",
+      "GitLab CI/CD",
+      "NetBox",
+      "Python",
+      "Proxmox",
+      "AWS"
+    ]
+  },
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "I have spent nearly 5 years running critical production infrastructure: monitoring, L2/L3 incident diagnosis, virtual machine provisioning and Linux and Windows administration. I have worked with French, Canadian and international clients.",
+      "I specialise in observability and automation. I build monitoring and dashboards with Zabbix, Grafana and Prometheus, and automate their configuration through GitOps, with GitLab CI/CD and NetBox as the source of truth. With a Master’s in Cybersecurity, I bring security into operations: system hardening, access management and alert monitoring.",
+      "I am looking for a role focused on observability and automation, in Morocco, France or remote. Arabic is my native language, and I work in French and English every day."
+    ]
   }
 }
