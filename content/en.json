@@ -208,5 +208,114 @@
         ]
       }
     ]
+  },
+  "projects": {
+    "proTitle": "Professional projects",
+    "persoTitle": "Personal projects",
+    "labels": {
+      "context": "Context",
+      "did": "What I did",
+      "method": "How it was built",
+      "tech": "Technologies"
+    },
+    "pro": [
+      {
+        "title": "Multi-region hybrid private cloud",
+        "meta": "Convotis · Hamburg",
+        "context": "Secure private cloud across 3 regions in high availability: more than 30 clustered Proxmox nodes, switches, firewalls and internal applications.",
+        "did": [
+          "End-to-end monitoring of a strictly segmented environment."
+        ],
+        "tech": [
+          "Proxmox"
+        ]
+      },
+      {
+        "title": "Wazuh SIEM monitoring & CIS compliance",
+        "meta": "Convotis Maroc",
+        "context": "Wazuh SIEM platform and CIS compliance audits across a large workload estate.",
+        "did": [
+          "Centralised monitoring of Wazuh components through the Zabbix API.",
+          "Contributed, together with the Ansible team, to automating CIS audits and remediation across more than 300 workloads, cutting turnaround from several days to a few hours."
+        ],
+        "tech": [
+          "Wazuh",
+          "Zabbix API",
+          "CIS Benchmarks"
+        ]
+      }
+    ],
+    "perso": [
+      {
+        "title": "Automated video production pipeline",
+        "meta": "Personal project",
+        "diagram": true,
+        "context": "End-to-end automated system that turns comics into narrated videos, all the way to YouTube publication. More than 200 episodes processed.",
+        "did": [
+          "Six chained stages: image extraction, description by vision models, script generation, text-to-speech, video assembly and YouTube publication (API v3, OAuth).",
+          "Parallel pipeline architecture, automatic recovery after failures, and failover between several AI providers (local GPU and cloud gateway).",
+          "FastAPI operations web interface: queues, real-time tracking and GPU monitoring."
+        ],
+        "method": "I designed and directed the system: detailed specifications, review of every change as a GitHub pull request (40+ PRs), testing on real data and diagnosing failures from logs. Development itself was AI-assisted.",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "ffmpeg",
+          "AI models (vision, TTS)",
+          "YouTube Data API v3",
+          "OAuth"
+        ]
+      },
+      {
+        "title": "Home lab & tooling",
+        "meta": "Personal project",
+        "context": "Personal infrastructure for hosting AI models and services, reachable remotely without exposure to the internet.",
+        "did": [
+          "Local AI models on GPU and a multi-provider gateway.",
+          "Docker services and zero-trust remote access through Twingate, without exposure to the internet.",
+          "CLI utility that removes silences from videos (ffmpeg).",
+          "Windows control panel with real-time monitoring."
+        ],
+        "tech": [
+          "Docker",
+          "Twingate",
+          "Python",
+          "ffmpeg",
+          "Windows"
+        ]
+      }
+    ],
+    "diagram": {
+      "title": "Video pipeline architecture",
+      "desc": "Six stages in sequence: ingestion, vision model, script generation, text-to-speech, video assembly, publication. AI stages fail over between a local GPU and a cloud gateway.",
+      "steps": [
+        [
+          "Ingestion",
+          "image extraction"
+        ],
+        [
+          "Vision model",
+          "image description"
+        ],
+        [
+          "Script generation",
+          "narration text"
+        ],
+        [
+          "Text-to-speech",
+          "voice-over"
+        ],
+        [
+          "Video assembly",
+          "ffmpeg"
+        ],
+        [
+          "Publication",
+          "YouTube API v3, OAuth"
+        ]
+      ],
+      "aiBadge": "AI",
+      "legend": "AI: local GPU or cloud gateway, with automatic failover. Stages run in parallel and resume after failures."
+    }
   }
 }

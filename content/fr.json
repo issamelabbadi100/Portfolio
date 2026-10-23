@@ -208,5 +208,114 @@
         ]
       }
     ]
+  },
+  "projects": {
+    "proTitle": "Projets professionnels",
+    "persoTitle": "Projets personnels",
+    "labels": {
+      "context": "Contexte",
+      "did": "Réalisations",
+      "method": "Méthode",
+      "tech": "Technologies"
+    },
+    "pro": [
+      {
+        "title": "Cloud privé hybride multi-régions",
+        "meta": "Convotis · Hambourg",
+        "context": "Cloud privé sécurisé sur 3 régions en haute disponibilité : plus de 30 nœuds Proxmox en cluster, switches, pare-feux et applications internes.",
+        "did": [
+          "Supervision de bout en bout d’un environnement strictement segmenté."
+        ],
+        "tech": [
+          "Proxmox"
+        ]
+      },
+      {
+        "title": "Supervision SIEM Wazuh & conformité CIS",
+        "meta": "Convotis Maroc",
+        "context": "Plateforme SIEM Wazuh et audits de conformité CIS sur un large parc de workloads.",
+        "did": [
+          "Supervision centralisée des composants Wazuh via l’API Zabbix.",
+          "Contribution, avec l’équipe Ansible, à l’automatisation des audits CIS et de la remédiation sur plus de 300 workloads, ramenant les délais de plusieurs jours à quelques heures."
+        ],
+        "tech": [
+          "Wazuh",
+          "Zabbix API",
+          "CIS Benchmarks"
+        ]
+      }
+    ],
+    "perso": [
+      {
+        "title": "Pipeline automatisé de production vidéo",
+        "meta": "Projet personnel",
+        "diagram": true,
+        "context": "Système automatisé de bout en bout qui transforme des bandes dessinées en vidéos narrées, jusqu’à la publication YouTube. Plus de 200 épisodes traités.",
+        "did": [
+          "Six étapes enchaînées : extraction d’images, description par modèles de vision, génération de script, synthèse vocale, montage vidéo et publication YouTube (API v3, OAuth).",
+          "Architecture en pipeline parallèle, reprise automatique après incident et bascule entre plusieurs fournisseurs d’IA (GPU local et passerelle cloud).",
+          "Interface web d’exploitation sous FastAPI : files d’attente, suivi temps réel et supervision du GPU."
+        ],
+        "method": "J’ai conçu et piloté le système : spécifications détaillées, revue de chaque modification par pull request GitHub (plus de 40 PR), tests sur données réelles et diagnostic des pannes à partir des logs. Le développement lui-même a été assisté par IA.",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "ffmpeg",
+          "Modèles IA (vision, TTS)",
+          "YouTube Data API v3",
+          "OAuth"
+        ]
+      },
+      {
+        "title": "Home lab & outillage",
+        "meta": "Projet personnel",
+        "context": "Infrastructure personnelle pour héberger des modèles IA et des services, accessible à distance sans exposition Internet.",
+        "did": [
+          "Modèles IA locaux sur GPU et passerelle multi-fournisseurs.",
+          "Services Docker et accès distant zero-trust via Twingate, sans exposition Internet.",
+          "Utilitaire CLI de suppression des silences dans les vidéos (ffmpeg).",
+          "Panneau de contrôle Windows avec supervision temps réel."
+        ],
+        "tech": [
+          "Docker",
+          "Twingate",
+          "Python",
+          "ffmpeg",
+          "Windows"
+        ]
+      }
+    ],
+    "diagram": {
+      "title": "Architecture du pipeline vidéo",
+      "desc": "Six étapes en séquence : ingestion, modèle de vision, génération de script, synthèse vocale, montage vidéo, publication. Les étapes IA basculent entre GPU local et passerelle cloud.",
+      "steps": [
+        [
+          "Ingestion",
+          "extraction d’images"
+        ],
+        [
+          "Modèle de vision",
+          "description des images"
+        ],
+        [
+          "Génération de script",
+          "texte de narration"
+        ],
+        [
+          "Synthèse vocale",
+          "voix off"
+        ],
+        [
+          "Montage vidéo",
+          "ffmpeg"
+        ],
+        [
+          "Publication",
+          "YouTube API v3, OAuth"
+        ]
+      ],
+      "aiBadge": "IA",
+      "legend": "IA : GPU local ou passerelle cloud, avec bascule automatique. Étapes parallélisées, reprise après incident."
+    }
   }
 }
