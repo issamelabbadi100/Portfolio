@@ -1,0 +1,50 @@
+---
+const { d } = Astro.props;
+const ai = [1, 2, 3]; // vision, script, text-to-speech
+const step = 84, boxH = 56, x = 16, w = 288;
+const height = 8 + (d.steps.length - 1) * step + boxH + 8;
+---
+<figure class="diagram">
+  <svg viewBox={`0 0 320 ${height}`} role="img" aria-labelledby="pd-title pd-desc">
+    <title id="pd-title">{d.title}</title>
+    <desc id="pd-desc">{d.desc}</desc>
+    <defs>
+      <marker id="pd-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 10 5 0 10z" class="arrow-head" />
+      </marker>
+    </defs>
+    {d.steps.map(([label, sub], i) => {
+      const y = 8 + i * step;
+      return (
+        <g>
+          {i > 0 && <line x1="160" y1={y - step + boxH} x2="160" y2={y - 3} class="arrow" marker-end="url(#pd-arrow)" />}
+          <rect x={x} y={y} width={w} height={boxH} rx="6" class="box" />
+          <text x={x + 16} y={y + 33} class="num">{String(i + 1).padStart(2, '0')}</text>
+          <text x={x + 48} y={y + 24} class="label">{label}</text>
+          <text x={x + 48} y={y + 43} class="sub">{sub}</text>
+          {ai.includes(i) && (
+            <g>
+              <rect x={x + w - 44} y={y + 17} width="32" height="22" rx="4" class="badge" />
+              <text x={x + w - 28} y={y + 32} class="badge-text" text-anchor="middle">{d.aiBadge}</text>
+            </g>
+          )}
+        </g>
+      );
+    })}
+  </svg>
+  <figcaption class="muted">{d.legend}</figcaption>
+</figure>
+
+<style>
+  .diagram { margin: 0; max-width: 22rem; }
+  svg { display: block; width: 100%; height: auto; }
+  .box { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+  .num { fill: var(--accent); font: 600 12px var(--font-mono); }
+  .label { fill: var(--text); font: 600 15px var(--font-sans); }
+  .sub { fill: var(--muted); font: 400 12px var(--font-mono); }
+  .arrow { stroke: var(--muted); stroke-width: 1.5; }
+  .arrow-head { fill: var(--muted); }
+  .badge { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+  .badge-text { fill: var(--accent); font: 700 11px var(--font-mono); }
+  figcaption { margin-top: 0.75rem; font-size: 0.85rem; line-height: 1.5; }
+</style>

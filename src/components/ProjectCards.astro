@@ -1,0 +1,97 @@
+---
+import PipelineDiagram from './PipelineDiagram.astro';
+
+const { t, id, nav, idx, title, items, stack = false } = Astro.props;
+const l = t.projects.labels;
+---
+<section id={id} data-nav={nav} class="section" aria-labelledby={`${id}-title`}>
+  <div class="wrap">
+    <h2 id={`${id}-title`} class="section-title reveal"><span class="idx" aria-hidden="true">{idx}</span>{title}</h2>
+    <div class:list={["cards", { stack }]}>
+      {items.map((p) => (
+        <article class:list={['card', 'reveal', { wide: p.diagram }]}>
+          <div class="body">
+            <p class="meta mono">{p.meta}</p>
+            <h3>{p.title}</h3>
+            <h4 class="visually-hidden">{l.context}</h4>
+            <p class="context">{p.context}</p>
+            <h4>{l.did}</h4>
+            <ul>{p.did.map((b) => <li>{b}</li>)}</ul>
+            {p.method && (
+              <>
+                <h4>{l.method}</h4>
+                <p class="method">{p.method}</p>
+              </>
+            )}
+            <h4 class="visually-hidden">{l.tech}</h4>
+            <ul class="tech mono">{p.tech.map((x) => <li>{x}</li>)}</ul>
+          </div>
+          {p.diagram && <PipelineDiagram d={t.projects.diagram} />}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cards { display: grid; gap: 1.25rem; }
+  .card {
+    display: grid;
+    gap: 2rem;
+    align-content: start;
+    padding: 1.5rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .meta { color: var(--accent); font-size: 0.8rem; margin-bottom: 0.35rem; }
+  h3 { font-size: 1.15rem; }
+  h4 {
+    margin: 1.1rem 0 0.4rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .context { margin: 0; }
+  ul { margin: 0; padding-left: 1.1rem; }
+  li { margin-bottom: 0.35rem; }
+  li::marker { color: var(--accent); }
+  .method {
+    margin: 0;
+    padding-left: 0.85rem;
+    border-left: 2px solid var(--accent);
+  }
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.78rem;
+  }
+  .tech li {
+    margin: 0;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+  }
+  @media (min-width: 44rem) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card { padding: 1.75rem; }
+    .wide { grid-column: 1 / -1; }
+  }
+  /* Stacked sections: one full-width card per row, lists flow in two columns when there is no diagram. */
+  @media (min-width: 44rem) {
+    .stack { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 56rem) {
+    .stack .card:not(.wide) ul:not(.tech) { columns: 2; column-gap: 2.5rem; }
+    .stack .card:not(.wide) li { break-inside: avoid; }
+    .wide { grid-template-columns: minmax(0, 1fr) 20rem; gap: 2.5rem; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+const { t } = Astro.props;
+---
+<section id="skills" data-nav="skills" class="section" aria-labelledby="skills-title">
+  <div class="wrap reveal">
+    <h2 id="skills-title" class="section-title"><span class="idx" aria-hidden="true">02</span>{t.skills.title}</h2>
+    <div class="groups">
+      {t.skills.groups.map((g) => (
+        <div class="group">
+          <h3>{g.name}</h3>
+          <ul>{g.items.map((item) => <li>{item}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .groups {
+    display: grid;
+    gap: 1rem;
+  }
+  .group {
+    padding: 1.1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  h3 {
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9rem;
+  }
+  li {
+    padding: 0.15rem 0.55rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  @media (min-width: 44rem) {
+    .groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>

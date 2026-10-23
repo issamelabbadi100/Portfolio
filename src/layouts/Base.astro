@@ -1,0 +1,80 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const paths = { fr: base, en: `${base}en/` };
+const canonical = new URL(paths[t.lang], Astro.site).href;
+const ogImage = new URL(`${base}og-${t.lang}.png`, Astro.site).href;
+
+// Phone intentionally left out of structured data.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: t.profile.name,
+  jobTitle: t.profile.title,
+  email: `mailto:${t.profile.email}`,
+  url: canonical,
+  address: { '@type': 'PostalAddress', addressLocality: 'Fès', addressCountry: 'MA' },
+  sameAs: [t.profile.linkedin, t.profile.github],
+  knowsLanguage: ['ar', 'fr', 'en'],
+};
+---
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr" href={new URL(paths.fr, Astro.site).href} />
+    <link rel="alternate" hreflang="en" href={new URL(paths.en, Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(paths.fr, Astro.site).href} />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}favicon-32.png`} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <link rel="prefetch" href={t.lang === 'fr' ? paths.en : paths.fr} />
+    <meta name="theme-color" content="#0a1020" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={t.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.meta.title} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Runs before paint: apply saved theme, send returning English readers to /en/,
+         and hide text when arriving from a language switch so it can type itself in. -->
+    <script is:inline define:vars={{ enPath: paths.en, isFr: t.lang === 'fr' }}>
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var th = localStorage.getItem('theme');
+        if (th) d.dataset.theme = th;
+        if (isFr && localStorage.getItem('lang') === 'en') location.replace(enPath);
+        if (sessionStorage.getItem('lang-switch') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('tw-pending');
+          setTimeout(function () { d.classList.remove('tw-pending'); }, 2000);
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/site.js';
+    </script>
+  </body>
+</html>

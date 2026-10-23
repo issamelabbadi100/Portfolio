@@ -1,0 +1,123 @@
+---
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const p = t.profile;
+const c = t.contact;
+// The box label already names the site, so show only the profile path.
+const strip = (url) => new URL(url).pathname.replace(/^\/|\/$/g, '');
+
+// Icon paths on a 24px grid, stroked unless noted.
+const icons = {
+  email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  linkedin: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.5v.01M12 17v-6M12 13.5a2.5 2.5 0 0 1 5 0V17"/>',
+  github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+};
+
+const channels = [
+  { key: 'email', href: `mailto:${p.email}`, text: p.email, copy: p.email },
+  { key: 'phone', href: `tel:${p.phoneHref}`, text: p.phone, copy: p.phone },
+  { key: 'linkedin', href: p.linkedin, text: strip(p.linkedin), copy: p.linkedin, rel: 'me' },
+  { key: 'github', href: p.github, text: strip(p.github), copy: p.github, rel: 'me', note: c.githubNote },
+];
+---
+<section id="contact" data-nav="contact" class="section" aria-labelledby="contact-title">
+  <div class="wrap reveal">
+    <h2 id="contact-title" class="section-title"><span class="idx" aria-hidden="true">07</span>{c.title}</h2>
+    <p class="open prose">{c.open}</p>
+    <ul class="channels">
+      {channels.map((ch) => (
+        <li class="channel">
+          <svg class="icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" set:html={icons[ch.key]} />
+          <div class="info">
+            <span class="label mono">{c.labels[ch.key]}</span>
+            <a href={ch.href} rel={ch.rel}>{ch.text}</a>
+            {ch.note && <span class="note muted">{ch.note}</span>}
+          </div>
+          <button class="copy mono" type="button" hidden
+                  data-copy={ch.copy} data-copied={c.copied} data-announce={`${c.labels[ch.key]} ${c.copiedAnnounce}`}
+                  aria-label={`${c.copy} ${c.labels[ch.key]}`}>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+              <rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a1 1 0 0 1 1-1h10" />
+            </svg>
+            <span>{c.copy}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+    <p class="visually-hidden" aria-live="polite" data-copy-status></p>
+    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download>
+      {c.cvButton} <span class="hint">({t.hero.cvHint})</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .open { font-size: 1.15rem; }
+  .channels {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.5rem 0 2rem;
+    padding: 0;
+    list-style: none;
+  }
+  .channel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 0.9rem 0.9rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.15s;
+  }
+  .channel:hover, .channel:focus-within { border-color: var(--accent); }
+  .icon {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .info { display: grid; gap: 0.1rem; min-width: 0; }
+  .label {
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .info a {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .info a:hover { color: var(--accent); text-decoration: underline; }
+  .note { font-size: 0.8rem; }
+  .copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .copy[hidden] { display: none; }
+  .copy svg { fill: none; stroke: currentColor; stroke-width: 2; }
+  .copy:hover { border-color: var(--accent); color: var(--accent); }
+  .copy.done { border-color: var(--accent); color: var(--accent); }
+  .hint { font-weight: 400; opacity: 0.8; }
+  /* Very narrow phones: icon-only copy button so the value keeps room. */
+  @media (max-width: 23rem) {
+    .copy span { display: none; }
+  }
+  @media (min-width: 44rem) {
+    .channels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>

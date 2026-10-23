@@ -1,0 +1,37 @@
+---
+const { t } = Astro.props;
+---
+<section id="education" data-nav="education" class="section" aria-labelledby="education-title">
+  <div class="wrap reveal">
+    <h2 id="education-title" class="section-title"><span class="idx" aria-hidden="true">06</span>{t.education.title}</h2>
+    <ul class="list prose">
+      {t.education.items.map((e) => (
+        <li>
+          <p class="dates mono">{e.dates}</p>
+          <div>
+            <h3>{e.name}</h3>
+            <p class="muted">{e.org}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .list { margin: 0; padding: 0; list-style: none; }
+  li {
+    display: grid;
+    gap: 0.1rem 1.5rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  li:first-child { padding-top: 0; }
+  .dates { margin: 0; color: var(--accent); font-size: 0.85rem; }
+  h3 { margin-bottom: 0.1rem; }
+  .muted { margin: 0; }
+  @media (min-width: 40rem) {
+    li { grid-template-columns: 8rem 1fr; }
+    .dates { padding-top: 0.15rem; }
+  }
+</style>
