@@ -151,5 +151,62 @@
         ]
       }
     ]
+  },
+  "experience": {
+    "title": "Expérience",
+    "employers": [
+      {
+        "company": "Convotis Maroc",
+        "location": "Fès",
+        "dates": "Depuis mai 2025",
+        "roles": [
+          {
+            "role": "Ingénieur Systèmes",
+            "dates": "Mai 2025 à aujourd’hui",
+            "bullets": [
+              "Supervision de plus de 1 200 systèmes Linux et Windows sous Zabbix, Grafana et Prometheus",
+              "Intégration Zabbix et Grafana : tableaux de bord et cartographie des data centers physiques",
+              "Automatisation GitOps d’un environnement Zabbix critique via GitLab, avec NetBox comme source de vérité",
+              "Load balancing sécurisé avec Traefik (reverse proxy, CDN, WAF)",
+              "Provisionnement de machines virtuelles sur AWS, Proxmox et VMware ; diagnostic d’incidents N2/N3"
+            ]
+          }
+        ]
+      },
+      {
+        "company": "CGI",
+        "location": "Fès",
+        "dates": "Mars 2022 à mai 2025",
+        "roles": [
+          {
+            "role": "Administrateur Systèmes & Supervision",
+            "dates": "Sept. 2024 à mai 2025",
+            "bullets": [
+              "Déploiement et administration de Centreon, Eye of Network et MOM pour des clients français et internationaux",
+              "Définition des indicateurs de supervision, traitement des alertes et incidents dans le respect des SLA",
+              "Automatisation des opérations récurrentes en Bash"
+            ]
+          },
+          {
+            "role": "Ingénieur DevOps (Flexera)",
+            "dates": "Juin 2023 à sept. 2024",
+            "bullets": [
+              "Scripts Python d’automatisation remplaçant des tâches manuelles",
+              "Contribution aux pipelines CI/CD (workflows Git)",
+              "Maintenance préventive et corrective avant les montées de version"
+            ]
+          },
+          {
+            "role": "Support Infrastructure & Technique",
+            "dates": "Mars 2022 à juin 2023",
+            "bullets": [
+              "Administration Linux et Windows, Active Directory, VMware et Hyper-V",
+              "Contact technique principal de plus de 120 clients institutionnels canadiens",
+              "Surveillance des alertes de sécurité (SentinelOne, Kaspersky, Proofpoint) et refonte des procédures d’escalade"
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

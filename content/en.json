@@ -151,5 +151,62 @@
         ]
       }
     ]
+  },
+  "experience": {
+    "title": "Experience",
+    "employers": [
+      {
+        "company": "Convotis Maroc",
+        "location": "Fès",
+        "dates": "Since May 2025",
+        "roles": [
+          {
+            "role": "Systems Engineer",
+            "dates": "May 2025 to present",
+            "bullets": [
+              "Monitoring of more than 1,200 Linux and Windows systems with Zabbix, Grafana and Prometheus",
+              "Zabbix and Grafana integration: dashboards and mapping of physical data centres",
+              "GitOps automation of a critical Zabbix environment through GitLab, with NetBox as the source of truth",
+              "Secure load balancing with Traefik (reverse proxy, CDN, WAF)",
+              "Virtual machine provisioning on AWS, Proxmox and VMware; L2/L3 incident diagnosis"
+            ]
+          }
+        ]
+      },
+      {
+        "company": "CGI",
+        "location": "Fès",
+        "dates": "March 2022 to May 2025",
+        "roles": [
+          {
+            "role": "Systems & Monitoring Administrator",
+            "dates": "Sept. 2024 to May 2025",
+            "bullets": [
+              "Deployment and administration of Centreon, Eye of Network and MOM (internal client tooling) for French and international clients",
+              "Defined monitoring indicators and handled alerts and incidents within SLAs",
+              "Automated recurring operations in Bash"
+            ]
+          },
+          {
+            "role": "DevOps Engineer (Flexera)",
+            "dates": "June 2023 to Sept. 2024",
+            "bullets": [
+              "Python automation scripts replacing manual tasks",
+              "Contributed to CI/CD pipelines (Git workflows)",
+              "Preventive and corrective maintenance ahead of version upgrades"
+            ]
+          },
+          {
+            "role": "Infrastructure & Technical Support",
+            "dates": "March 2022 to June 2023",
+            "bullets": [
+              "Linux and Windows administration, Active Directory, VMware and Hyper-V",
+              "Main technical contact for more than 120 Canadian institutional clients",
+              "Security alert monitoring (SentinelOne, Kaspersky, Proofpoint) and redesign of escalation procedures"
+            ]
+          }
+        ]
+      }
+    ]
   }
 }
