@@ -47,6 +47,25 @@
       "Python",
       "Proxmox",
       "AWS"
+    ],
+    "factsLabel": "Key figures",
+    "facts": [
+      {
+        "value": "~5 yrs",
+        "label": "in critical production"
+      },
+      {
+        "value": "1,200+",
+        "label": "systems monitored"
+      },
+      {
+        "value": "30+",
+        "label": "Proxmox nodes across 3 regions"
+      },
+      {
+        "value": "120+",
+        "label": "Canadian institutional clients"
+      }
     ]
   },
   "about": {

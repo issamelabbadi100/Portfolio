@@ -81,6 +81,17 @@ const jsonLd = {
           });
         }, { rootMargin: '0px 0px -10% 0px' });
         items.forEach(function (el) { io.observe(el); });
+        // Highlight the nav link of the section crossing the middle of the viewport.
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            document.querySelectorAll('[data-spy]').forEach(function (a) {
+              if (a.dataset.spy === en.target.dataset.nav) a.setAttribute('aria-current', 'true');
+              else a.removeAttribute('aria-current');
+            });
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('[data-nav]').forEach(function (s) { spy.observe(s); });
       } else {
         items.forEach(function (el) { el.classList.add('is-visible'); });
       }
