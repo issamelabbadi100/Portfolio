@@ -28,9 +28,9 @@
     "projects": "Projects",
     "education": "Education",
     "contact": "Contact",
-    "langSwitch": "FR",
     "langSwitchLabel": "Passer en français",
-    "themeToggle": "Toggle light and dark theme"
+    "themeToggle": "Toggle light and dark theme",
+    "langLabel": "Language"
   },
   "hero": {
     "positioning": "Systems engineer with nearly 5 years running critical production infrastructure, specialised in monitoring and observability (Zabbix, Grafana, Prometheus) and GitOps automation.",
@@ -348,7 +348,10 @@
       "github": "GitHub"
     },
     "githubNote": "Most of my repositories are private.",
-    "cvButton": "Download my CV"
+    "cvButton": "Download my CV",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copiedAnnounce": "copied to clipboard"
   },
   "footer": {
     "rights": "All rights reserved."

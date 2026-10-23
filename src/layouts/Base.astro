@@ -72,7 +72,22 @@ const jsonLd = {
           d.dataset.theme = dark ? 'light' : 'dark';
           try { localStorage.setItem('theme', d.dataset.theme); } catch (err) {}
         }
+        var btn = e.target.closest('[data-copy]');
+        if (btn && !btn.classList.contains('done')) {
+          navigator.clipboard.writeText(btn.dataset.copy).then(function () {
+            var label = btn.querySelector('span');
+            var original = label.textContent;
+            label.textContent = btn.dataset.copied;
+            btn.classList.add('done');
+            document.querySelector('[data-copy-status]').textContent = btn.dataset.announce;
+            setTimeout(function () { label.textContent = original; btn.classList.remove('done'); }, 2000);
+          });
+        }
       });
+      // Copy buttons only appear where the Clipboard API is available (HTTPS or localhost).
+      if (navigator.clipboard) {
+        document.querySelectorAll('[data-copy]').forEach(function (b) { b.hidden = false; });
+      }
       var items = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
