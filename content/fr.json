@@ -317,5 +317,25 @@
       "aiBadge": "IA",
       "legend": "IA : GPU local ou passerelle cloud, avec bascule automatique. Étapes parallélisées, reprise après incident."
     }
+  },
+  "education": {
+    "title": "Formation & certifications",
+    "items": [
+      {
+        "name": "Master en Cybersécurité",
+        "org": "ENSA Kénitra",
+        "dates": "2023 à 2025"
+      },
+      {
+        "name": "Licence en Systèmes d’Information et Réseaux",
+        "org": "Université Ibn Tofail, Kénitra",
+        "dates": "2021 à 2022"
+      },
+      {
+        "name": "PCAP: Programming Essentials in Python",
+        "org": "Certification",
+        "dates": "2021"
+      }
+    ]
   }
 }
