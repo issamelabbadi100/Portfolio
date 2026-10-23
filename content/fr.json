@@ -31,5 +31,30 @@
     "langSwitch": "EN",
     "langSwitchLabel": "Switch to English",
     "themeToggle": "Basculer entre thème clair et sombre"
+  },
+  "hero": {
+    "positioning": "Ingénieur systèmes avec près de 5 ans d’exploitation d’infrastructures de production critiques, spécialisé en supervision et observabilité (Zabbix, Grafana, Prometheus) et en automatisation GitOps.",
+    "cvButton": "Télécharger mon CV",
+    "cvHint": "PDF",
+    "contactButton": "Me contacter",
+    "techLabel": "Technologies clés",
+    "tech": [
+      "Zabbix",
+      "Grafana",
+      "Prometheus",
+      "GitLab CI/CD",
+      "NetBox",
+      "Python",
+      "Proxmox",
+      "AWS"
+    ]
+  },
+  "about": {
+    "title": "À propos",
+    "paragraphs": [
+      "J’exploite des infrastructures de production critiques depuis près de 5 ans : supervision, diagnostic d’incidents N2/N3, provisionnement de machines virtuelles et administration de systèmes Linux et Windows. J’ai travaillé pour des clients français, canadiens et internationaux.",
+      "Ma spécialité est l’observabilité et l’automatisation. Je construis la supervision et les tableaux de bord sous Zabbix, Grafana et Prometheus, et j’automatise leur configuration en GitOps, avec GitLab CI/CD et NetBox comme source de vérité. Titulaire d’un Master en Cybersécurité, j’intègre la sécurité à l’exploitation : durcissement système, gestion des accès, surveillance des alertes.",
+      "Je recherche un poste centré sur l’observabilité et l’automatisation, au Maroc, en France ou en télétravail. Arabe langue maternelle, je travaille au quotidien en français et en anglais."
+    ]
   }
 }

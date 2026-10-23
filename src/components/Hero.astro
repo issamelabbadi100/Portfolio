@@ -1,0 +1,67 @@
+---
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<section class="hero wrap" aria-labelledby="hero-name">
+  <p class="title mono">{t.profile.title}</p>
+  <h1 id="hero-name">{t.profile.name}</h1>
+  <p class="positioning prose">{t.hero.positioning}</p>
+  <p class="location muted">
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+      <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2" />
+      <circle cx="12" cy="10" r="2.5" fill="currentColor" />
+    </svg>
+    {t.profile.location}
+  </p>
+  <div class="actions">
+    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download>
+      {t.hero.cvButton} <span class="hint">({t.hero.cvHint})</span>
+    </a>
+    <a class="btn btn-secondary" href="#contact">{t.hero.contactButton}</a>
+  </div>
+  <ul class="tech mono" aria-label={t.hero.techLabel}>
+    {t.hero.tech.map((name) => <li>{name}</li>)}
+  </ul>
+</section>
+
+<style>
+  .hero { padding-block: 3rem 3.5rem; }
+  .title {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .positioning { font-size: 1.125rem; }
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block: 1.5rem 2rem;
+  }
+  .hint { font-weight: 400; opacity: 0.8; }
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+  }
+  .tech li {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+  }
+  @media (min-width: 40rem) {
+    .hero { padding-block: 5rem; }
+  }
+</style>
