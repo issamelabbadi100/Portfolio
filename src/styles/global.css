@@ -38,7 +38,7 @@
   --wrap: 64rem;
   --prose: 45rem;
   --gutter: 1rem;
-  --header-h: 3.5rem;
+  --header-h: 6.4rem;
   --radius: 6px;
 }
 @media (min-width: 40rem) {
@@ -140,4 +140,8 @@ ul { padding-left: 1.2rem; }
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
   .js .reveal.is-visible { opacity: 1; transform: none; }
+}
+
+@media (min-width: 60rem) {
+  :root { --header-h: 3.5rem; }
 }

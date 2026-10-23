@@ -7,12 +7,12 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
 <a class="skip-link" href="#main">{t.nav.skip}</a>
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand mono" href="#top" aria-label={t.profile.name}>
-      <span aria-hidden="true">~/issam</span>
+    <a class="brand mono" href="#top">
+      <span class="prompt" aria-hidden="true">~/</span>{t.profile.name}
     </a>
     <nav aria-label={t.nav.label}>
       <ul>
-        {links.map((id) => <li><a href={`#${id}`}>{t.nav[id]}</a></li>)}
+        {links.map((id) => <li><a href={`#${id}`} data-spy={id}>{t.nav[id]}</a></li>)}
       </ul>
     </nav>
     <div class="tools">
@@ -36,33 +36,56 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
     background: var(--bg);
     border-bottom: 1px solid var(--border);
   }
+  /* Phone: brand + tools on row one, scrollable section links on row two. */
   .bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 3.5rem auto;
+    grid-template-areas: 'brand tools' 'nav nav';
     align-items: center;
-    gap: 1rem;
-    height: var(--header-h);
+    column-gap: 1.5rem;
   }
   .brand {
+    grid-area: brand;
     color: var(--text);
+    font-size: 0.95rem;
     font-weight: 700;
     text-decoration: none;
+    white-space: nowrap;
   }
-  nav { margin-left: auto; }
+  .prompt { color: var(--accent); }
+  nav {
+    grid-area: nav;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    border-top: 1px solid var(--border);
+  }
+  nav::-webkit-scrollbar { display: none; }
   nav ul {
-    display: none;
+    display: flex;
+    gap: 1.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 1.25rem;
+    white-space: nowrap;
   }
   nav a {
+    display: block;
+    padding-block: 0.65rem;
+    border-bottom: 2px solid transparent;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
     text-decoration: none;
   }
   nav a:hover { color: var(--text); }
-  .tools { display: flex; gap: 0.5rem; margin-left: auto; }
-  nav + .tools { margin-left: 0; }
+  nav a[aria-current='true'] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  .tools { grid-area: tools; display: flex; gap: 0.5rem; }
   .tool {
     display: inline-grid;
     place-items: center;
@@ -79,7 +102,18 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
     cursor: pointer;
   }
   .tool:hover { border-color: var(--accent); }
-  @media (min-width: 52rem) {
-    nav ul { display: flex; }
+  @media (min-width: 60rem) {
+    .bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: 3.5rem;
+      grid-template-areas: 'brand nav tools';
+    }
+    nav {
+      justify-self: end;
+      margin: 0;
+      padding: 0;
+      border-top: 0;
+    }
+    nav a { padding-block: 1.1rem; }
   }
 </style>
