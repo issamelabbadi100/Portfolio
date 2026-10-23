@@ -28,9 +28,8 @@
     "projects": "Projets",
     "education": "Formation",
     "contact": "Contact",
-    "langSwitchLabel": "Switch to English",
-    "themeToggle": "Basculer entre thème clair et sombre",
-    "langLabel": "Langue"
+    "langSwitchLabel": "Langue actuelle : français. Passer en anglais",
+    "themeToggle": "Basculer entre thème clair et sombre"
   },
   "hero": {
     "positioning": "Ingénieur systèmes avec près de 5 ans d’exploitation d’infrastructures de production critiques, spécialisé en supervision et observabilité (Zabbix, Grafana, Prometheus) et en automatisation GitOps.",

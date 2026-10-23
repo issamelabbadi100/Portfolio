@@ -34,6 +34,7 @@ const jsonLd = {
     <link rel="alternate" hreflang="en" href={new URL(paths.en, Astro.site).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(paths.fr, Astro.site).href} />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="prefetch" href={t.lang === 'fr' ? paths.en : paths.fr} />
     <meta name="theme-color" content="#0a1020" />
 
     <meta property="og:type" content="profile" />
@@ -49,7 +50,8 @@ const jsonLd = {
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Runs before paint: apply saved theme, and send returning English readers to /en/. -->
+    <!-- Runs before paint: apply saved theme, send returning English readers to /en/,
+         and hide text when arriving from a language switch so it can type itself in. -->
     <script is:inline define:vars={{ enPath: paths.en, isFr: t.lang === 'fr' }}>
       var d = document.documentElement;
       d.classList.add('js');
@@ -57,59 +59,17 @@ const jsonLd = {
         var th = localStorage.getItem('theme');
         if (th) d.dataset.theme = th;
         if (isFr && localStorage.getItem('lang') === 'en') location.replace(enPath);
+        if (sessionStorage.getItem('lang-switch') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('tw-pending');
+          setTimeout(function () { d.classList.remove('tw-pending'); }, 2000);
+        }
       } catch (e) {}
     </script>
   </head>
   <body>
     <slot />
-    <script is:inline>
-      document.addEventListener('click', function (e) {
-        var lang = e.target.closest('[data-lang]');
-        if (lang) { try { localStorage.setItem('lang', lang.dataset.lang); } catch (err) {} }
-        if (e.target.closest('[data-theme-toggle]')) {
-          var d = document.documentElement;
-          var dark = d.dataset.theme ? d.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-          d.dataset.theme = dark ? 'light' : 'dark';
-          try { localStorage.setItem('theme', d.dataset.theme); } catch (err) {}
-        }
-        var btn = e.target.closest('[data-copy]');
-        if (btn && !btn.classList.contains('done')) {
-          navigator.clipboard.writeText(btn.dataset.copy).then(function () {
-            var label = btn.querySelector('span');
-            var original = label.textContent;
-            label.textContent = btn.dataset.copied;
-            btn.classList.add('done');
-            document.querySelector('[data-copy-status]').textContent = btn.dataset.announce;
-            setTimeout(function () { label.textContent = original; btn.classList.remove('done'); }, 2000);
-          });
-        }
-      });
-      // Copy buttons only appear where the Clipboard API is available (HTTPS or localhost).
-      if (navigator.clipboard) {
-        document.querySelectorAll('[data-copy]').forEach(function (b) { b.hidden = false; });
-      }
-      var items = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
-          });
-        }, { rootMargin: '0px 0px -10% 0px' });
-        items.forEach(function (el) { io.observe(el); });
-        // Highlight the nav link of the section crossing the middle of the viewport.
-        var spy = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (!en.isIntersecting) return;
-            document.querySelectorAll('[data-spy]').forEach(function (a) {
-              if (a.dataset.spy === en.target.dataset.nav) a.setAttribute('aria-current', 'true');
-              else a.removeAttribute('aria-current');
-            });
-          });
-        }, { rootMargin: '-45% 0px -50% 0px' });
-        document.querySelectorAll('[data-nav]').forEach(function (s) { spy.observe(s); });
-      } else {
-        items.forEach(function (el) { el.classList.add('is-visible'); });
-      }
+    <script>
+      import '../scripts/site.js';
     </script>
   </body>
 </html>
