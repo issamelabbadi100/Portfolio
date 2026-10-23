@@ -1,0 +1,85 @@
+---
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const other = t.lang === 'fr' ? { lang: 'en', href: `${base}en/` } : { lang: 'fr', href: base };
+const links = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
+---
+<a class="skip-link" href="#main">{t.nav.skip}</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand mono" href="#top" aria-label={t.profile.name}>
+      <span aria-hidden="true">~/issam</span>
+    </a>
+    <nav aria-label={t.nav.label}>
+      <ul>
+        {links.map((id) => <li><a href={`#${id}`}>{t.nav[id]}</a></li>)}
+      </ul>
+    </nav>
+    <div class="tools">
+      <a class="tool mono" href={other.href} hreflang={other.lang} lang={other.lang}
+         data-lang={other.lang} aria-label={t.nav.langSwitchLabel}>{t.nav.langSwitch}</a>
+      <button class="tool" type="button" data-theme-toggle aria-label={t.nav.themeToggle}>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: var(--header-h);
+  }
+  .brand {
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  nav { margin-left: auto; }
+  nav ul {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.25rem;
+  }
+  nav a {
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--text); }
+  .tools { display: flex; gap: 0.5rem; margin-left: auto; }
+  nav + .tools { margin-left: 0; }
+  .tool {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 0.6rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--accent); }
+  @media (min-width: 52rem) {
+    nav ul { display: flex; }
+  }
+</style>

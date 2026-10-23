@@ -1,0 +1,35 @@
+{
+  "lang": "en",
+  "locale": "en_US",
+  "meta": {
+    "title": "Issam El Abbadi | Observability & Automation Engineer",
+    "description": "Systems engineer with nearly 5 years running critical production infrastructure, specialised in monitoring and observability (Zabbix, Grafana, Prometheus) and GitOps automation. Based in Fès, Morocco."
+  },
+  "profile": {
+    "name": "Issam El Abbadi",
+    "title": "Observability & Automation Engineer",
+    "location": "Fès, Morocco",
+    "email": "issamelabbadi100@gmail.com",
+    "phone": "+212 6 16 43 81 14",
+    "phoneHref": "+212616438114",
+    "linkedin": "https://www.linkedin.com/in/issam-elabbadi-20b142201",
+    "github": "https://github.com/issamelabbadi100"
+  },
+  "cv": {
+    "_note": "English CV pending: points at the French PDF for now. Swap to cv/CV-Issam-El-Abbadi-EN.pdf once it exists.",
+    "href": "cv/CV-Issam-El-Abbadi-FR.pdf"
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "label": "Main navigation",
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "education": "Education",
+    "contact": "Contact",
+    "langSwitch": "FR",
+    "langSwitchLabel": "Passer en français",
+    "themeToggle": "Toggle light and dark theme"
+  }
+}
