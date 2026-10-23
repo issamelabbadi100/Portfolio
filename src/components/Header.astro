@@ -16,12 +16,12 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
       </ul>
     </nav>
     <div class="tools">
-      <div class="lang mono" role="group" aria-label={t.nav.langLabel}>
-        {['fr', 'en'].map((l) => l === t.lang
-          ? <span class="lang-opt current" aria-current="true">{l.toUpperCase()}</span>
-          : <a class="lang-opt" href={other.href} hreflang={l} lang={l} data-lang={l}
-               aria-label={t.nav.langSwitchLabel}>{l.toUpperCase()}</a>)}
-      </div>
+      <a class="lang-switch mono" href={other.href} hreflang={other.lang} data-lang={other.lang}
+         data-current={t.lang} aria-label={t.nav.langSwitchLabel}>
+        <span class="thumb" aria-hidden="true"></span>
+        <span class="opt opt-fr" lang="fr" aria-hidden="true">FR</span>
+        <span class="opt opt-en" lang="en" aria-hidden="true">EN</span>
+      </a>
       <button class="tool" type="button" data-theme-toggle aria-label={t.nav.themeToggle}>
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
@@ -109,26 +109,47 @@ const links = ['about', 'skills', 'experience', 'projects', 'education', 'contac
     cursor: pointer;
   }
   .tool:hover { border-color: var(--accent); }
-  /* Language switch: current language filled, the other one is the link. */
-  .lang {
-    display: flex;
-    height: 2.75rem;
-    padding: 3px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-  .lang-opt {
+  /* Language switch: the thumb sits under the current language and slides
+     to the other one on click (before the page changes). */
+  .lang-switch {
+    position: relative;
     display: grid;
-    place-items: center;
-    min-width: 2.4rem;
-    border-radius: 4px;
-    color: var(--muted);
+    grid-template-columns: 1fr 1fr;
+    width: 5.5rem;
+    height: 2.75rem;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
     text-decoration: none;
   }
-  a.lang-opt:hover { color: var(--text); background: var(--surface); }
-  .lang-opt.current { background: var(--accent); color: var(--accent-ink); }
+  .lang-switch:hover { border-color: var(--accent); }
+  .thumb {
+    position: absolute;
+    inset: 4px auto 4px 4px;
+    width: calc(50% - 4px);
+    border-radius: 999px;
+    background: var(--accent);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .opt {
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: color 0.3s;
+  }
+  [data-current='en'] .thumb,
+  [data-current='fr'].is-moving .thumb { transform: translateX(100%); }
+  [data-current='en'].is-moving .thumb { transform: none; }
+  [data-current='fr']:not(.is-moving) .opt-fr,
+  [data-current='en']:not(.is-moving) .opt-en,
+  [data-current='fr'].is-moving .opt-en,
+  [data-current='en'].is-moving .opt-fr { color: var(--accent-ink); }
+  @media (prefers-reduced-motion: reduce) {
+    .thumb, .opt { transition: none; }
+  }
   @media (min-width: 60rem) {
     .bar {
       grid-template-columns: auto 1fr auto;
