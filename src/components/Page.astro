@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+
+const { t } = Astro.props;
+---
+<Base t={t}>
+  <Header t={t} />
+  <main id="main" tabindex="-1">
+    <div id="top"></div>
+    <!-- Sections are added in the following steps. -->
+    <section class="wrap section">
+      <h1>{t.profile.name}</h1>
+      <p class="muted mono">{t.profile.title}</p>
+    </section>
+  </main>
+</Base>
