@@ -1,13 +1,13 @@
 ---
 import PipelineDiagram from './PipelineDiagram.astro';
 
-const { t, id, nav, idx, title, items } = Astro.props;
+const { t, id, nav, idx, title, items, stack = false } = Astro.props;
 const l = t.projects.labels;
 ---
 <section id={id} data-nav={nav} class="section" aria-labelledby={`${id}-title`}>
   <div class="wrap">
     <h2 id={`${id}-title`} class="section-title reveal"><span class="idx" aria-hidden="true">{idx}</span>{title}</h2>
-    <div class="cards">
+    <div class:list={["cards", { stack }]}>
       {items.map((p) => (
         <article class:list={['card', 'reveal', { wide: p.diagram }]}>
           <div class="body">
@@ -85,7 +85,13 @@ const l = t.projects.labels;
     .card { padding: 1.75rem; }
     .wide { grid-column: 1 / -1; }
   }
+  /* Stacked sections: one full-width card per row, lists flow in two columns when there is no diagram. */
+  @media (min-width: 44rem) {
+    .stack { grid-template-columns: 1fr; }
+  }
   @media (min-width: 56rem) {
+    .stack .card:not(.wide) ul:not(.tech) { columns: 2; column-gap: 2.5rem; }
+    .stack .card:not(.wide) li { break-inside: avoid; }
     .wide { grid-template-columns: minmax(0, 1fr) 20rem; gap: 2.5rem; }
   }
 </style>

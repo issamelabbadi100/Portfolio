@@ -28,9 +28,9 @@
     "projects": "Projets",
     "education": "Formation",
     "contact": "Contact",
-    "langSwitch": "EN",
     "langSwitchLabel": "Switch to English",
-    "themeToggle": "Basculer entre thème clair et sombre"
+    "themeToggle": "Basculer entre thème clair et sombre",
+    "langLabel": "Langue"
   },
   "hero": {
     "positioning": "Ingénieur systèmes avec près de 5 ans d’exploitation d’infrastructures de production critiques, spécialisé en supervision et observabilité (Zabbix, Grafana, Prometheus) et en automatisation GitOps.",
@@ -348,7 +348,10 @@
       "github": "GitHub"
     },
     "githubNote": "La plupart de mes dépôts sont privés.",
-    "cvButton": "Télécharger mon CV"
+    "cvButton": "Télécharger mon CV",
+    "copy": "Copier",
+    "copied": "Copié",
+    "copiedAnnounce": "copié dans le presse-papiers"
   },
   "footer": {
     "rights": "Tous droits réservés."
