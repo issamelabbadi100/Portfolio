@@ -1,0 +1,16 @@
+---
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap mono muted">
+    <p>© {year} {t.profile.name}. {t.footer.rights}</p>
+    <p>{t.profile.location}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--border); padding-block: 2rem; font-size: 0.8rem; }
+  .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; }
+  p { margin: 0; }
+</style>
