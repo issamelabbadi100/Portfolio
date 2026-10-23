@@ -1,0 +1,168 @@
+---
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const other = t.lang === 'fr' ? { lang: 'en', href: `${base}en/` } : { lang: 'fr', href: base };
+const links = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
+---
+<a class="skip-link" href="#main">{t.nav.skip}</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand mono" href="#top">
+      <span class="prompt" aria-hidden="true">~/</span>{t.profile.name}
+    </a>
+    <nav aria-label={t.nav.label}>
+      <ul>
+        {links.map((id) => <li><a href={`#${id}`} data-spy={id}>{t.nav[id]}</a></li>)}
+      </ul>
+    </nav>
+    <div class="tools">
+      <a class="lang-switch mono" href={other.href} hreflang={other.lang} data-lang={other.lang}
+         data-current={t.lang} aria-label={t.nav.langSwitchLabel}>
+        <span class="thumb" aria-hidden="true"></span>
+        <span class="opt opt-fr" lang="fr" aria-hidden="true">FR</span>
+        <span class="opt opt-en" lang="en" aria-hidden="true">EN</span>
+      </a>
+      <button class="tool" type="button" data-theme-toggle aria-label={t.nav.themeToggle}>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  /* Phone: brand + tools on row one, scrollable section links on row two. */
+  .bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 3.5rem auto;
+    grid-template-areas: 'brand tools' 'nav nav';
+    align-items: center;
+    column-gap: 0.75rem;
+  }
+  .brand {
+    grid-area: brand;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .prompt { color: var(--accent); }
+  @media (max-width: 23rem) {
+    .prompt { display: none; }
+    .lang-switch { width: 5rem; }
+  }
+  nav {
+    grid-area: nav;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    border-top: 1px solid var(--border);
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav ul {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
+  nav a {
+    display: block;
+    padding-block: 0.65rem;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--text); }
+  nav a[aria-current='true'] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  .tools { grid-area: tools; display: flex; gap: 0.5rem; }
+  .tool {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 0.6rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .tool:hover { border-color: var(--accent); }
+  /* Language switch: the thumb sits under the current language and slides
+     to the other one on click (before the page changes). */
+  .lang-switch {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 5.5rem;
+    height: 2.75rem;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .lang-switch:hover { border-color: var(--accent); }
+  .thumb {
+    position: absolute;
+    inset: 4px auto 4px 4px;
+    width: calc(50% - 4px);
+    border-radius: 999px;
+    background: var(--accent);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .opt {
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: color 0.3s;
+  }
+  [data-current='en'] .thumb,
+  [data-current='fr'].is-moving .thumb { transform: translateX(100%); }
+  [data-current='en'].is-moving .thumb { transform: none; }
+  [data-current='fr']:not(.is-moving) .opt-fr,
+  [data-current='en']:not(.is-moving) .opt-en,
+  [data-current='fr'].is-moving .opt-en,
+  [data-current='en'].is-moving .opt-fr { color: var(--accent-ink); }
+  @media (prefers-reduced-motion: reduce) {
+    .thumb, .opt { transition: none; }
+  }
+  @media (min-width: 60rem) {
+    .bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: 3.5rem;
+      grid-template-areas: 'brand nav tools';
+    }
+    nav {
+      justify-self: end;
+      margin: 0;
+      padding: 0;
+      border-top: 0;
+    }
+    nav a { padding-block: 1.1rem; }
+  }
+</style>

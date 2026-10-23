@@ -1,0 +1,358 @@
+{
+  "lang": "en",
+  "locale": "en_US",
+  "meta": {
+    "title": "Issam El Abbadi | Observability & Automation Engineer",
+    "description": "Systems engineer with nearly 5 years running critical production infrastructure, specialised in monitoring and observability (Zabbix, Grafana, Prometheus) and GitOps automation. Based in Fès, Morocco."
+  },
+  "profile": {
+    "name": "Issam El Abbadi",
+    "title": "Observability & Automation Engineer",
+    "location": "Fès, Morocco",
+    "email": "issamelabbadi100@gmail.com",
+    "phone": "+212 6 16 43 81 14",
+    "phoneHref": "+212616438114",
+    "linkedin": "https://www.linkedin.com/in/issam-elabbadi-20b142201",
+    "github": "https://github.com/issamelabbadi100"
+  },
+  "cv": {
+    "_note": "English CV pending: points at the French PDF for now. Swap to cv/CV-Issam-El-Abbadi-EN.pdf once it exists.",
+    "href": "cv/CV-Issam-El-Abbadi-FR.pdf"
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "label": "Main navigation",
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "education": "Education",
+    "contact": "Contact",
+    "langSwitchLabel": "Current language: English. Switch to French",
+    "themeToggle": "Toggle light and dark theme"
+  },
+  "hero": {
+    "positioning": "Systems engineer with nearly 5 years running critical production infrastructure, specialised in monitoring and observability (Zabbix, Grafana, Prometheus) and GitOps automation.",
+    "cvButton": "Download my CV",
+    "cvHint": "PDF, French",
+    "contactButton": "Get in touch",
+    "techLabel": "Key technologies",
+    "tech": [
+      "Zabbix",
+      "Grafana",
+      "Prometheus",
+      "GitLab CI/CD",
+      "NetBox",
+      "Python",
+      "Proxmox",
+      "AWS"
+    ],
+    "factsLabel": "Key figures",
+    "facts": [
+      {
+        "value": "~5 yrs",
+        "label": "in critical production"
+      },
+      {
+        "value": "1,200+",
+        "label": "systems monitored"
+      },
+      {
+        "value": "30+",
+        "label": "Proxmox nodes across 3 regions"
+      },
+      {
+        "value": "120+",
+        "label": "Canadian institutional clients"
+      }
+    ]
+  },
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "I have spent nearly 5 years running critical production infrastructure: monitoring, L2/L3 incident diagnosis, virtual machine provisioning and Linux and Windows administration. I have worked with French, Canadian and international clients.",
+      "I specialise in observability and automation. I build monitoring and dashboards with Zabbix, Grafana and Prometheus, and automate their configuration through GitOps, with GitLab CI/CD and NetBox as the source of truth. With a Master’s in Cybersecurity, I bring security into operations: system hardening, access management and alert monitoring.",
+      "I am looking for a role focused on observability and automation, in Morocco, France or remote. Arabic is my native language, and I work in French and English every day."
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "groups": [
+      {
+        "name": "Observability",
+        "items": [
+          "Zabbix",
+          "Grafana",
+          "Prometheus",
+          "Centreon",
+          "Eye of Network",
+          "Elasticsearch"
+        ]
+      },
+      {
+        "name": "Automation",
+        "items": [
+          "Python (PCAP)",
+          "Bash",
+          "NetBox",
+          "GitHub",
+          "GitLab CI/CD",
+          "cron"
+        ]
+      },
+      {
+        "name": "Systems",
+        "items": [
+          "Linux (RHEL, Debian, CentOS, Ubuntu)",
+          "Windows Server",
+          "Active Directory"
+        ]
+      },
+      {
+        "name": "Cloud & virtualisation",
+        "items": [
+          "AWS (EC2, VPC, Route 53)",
+          "VMware",
+          "Proxmox (Qemu/KVM)",
+          "Hyper-V",
+          "Docker",
+          "Kubernetes"
+        ]
+      },
+      {
+        "name": "Web & data",
+        "items": [
+          "Traefik",
+          "Apache",
+          "Nginx",
+          "MySQL/MariaDB",
+          "PostgreSQL",
+          "Redis"
+        ]
+      },
+      {
+        "name": "Operations",
+        "items": [
+          "L2/L3 support",
+          "Incident and change management",
+          "Root cause analysis",
+          "SLAs",
+          "Runbooks"
+        ]
+      },
+      {
+        "name": "Security",
+        "items": [
+          "System hardening",
+          "WAF",
+          "Access management",
+          "Alert monitoring"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "employers": [
+      {
+        "company": "Convotis Maroc",
+        "location": "Fès",
+        "dates": "Since May 2025",
+        "roles": [
+          {
+            "role": "Systems Engineer",
+            "dates": "May 2025 to present",
+            "bullets": [
+              "Monitoring of more than 1,200 Linux and Windows systems with Zabbix, Grafana and Prometheus",
+              "Zabbix and Grafana integration: dashboards and mapping of physical data centres",
+              "GitOps automation of a critical Zabbix environment through GitLab, with NetBox as the source of truth",
+              "Secure load balancing with Traefik (reverse proxy, CDN, WAF)",
+              "Virtual machine provisioning on AWS, Proxmox and VMware; L2/L3 incident diagnosis"
+            ]
+          }
+        ]
+      },
+      {
+        "company": "CGI",
+        "location": "Fès",
+        "dates": "March 2022 to May 2025",
+        "roles": [
+          {
+            "role": "Systems & Monitoring Administrator",
+            "dates": "Sept. 2024 to May 2025",
+            "bullets": [
+              "Deployment and administration of Centreon, Eye of Network and MOM (internal client tooling) for French and international clients",
+              "Defined monitoring indicators and handled alerts and incidents within SLAs",
+              "Automated recurring operations in Bash"
+            ]
+          },
+          {
+            "role": "DevOps Engineer (Flexera)",
+            "dates": "June 2023 to Sept. 2024",
+            "bullets": [
+              "Python automation scripts replacing manual tasks",
+              "Contributed to CI/CD pipelines (Git workflows)",
+              "Preventive and corrective maintenance ahead of version upgrades"
+            ]
+          },
+          {
+            "role": "Infrastructure & Technical Support",
+            "dates": "March 2022 to June 2023",
+            "bullets": [
+              "Linux and Windows administration, Active Directory, VMware and Hyper-V",
+              "Main technical contact for more than 120 Canadian institutional clients",
+              "Security alert monitoring (SentinelOne, Kaspersky, Proofpoint) and redesign of escalation procedures"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "proTitle": "Professional projects",
+    "persoTitle": "Personal projects",
+    "labels": {
+      "context": "Context",
+      "did": "What I did",
+      "method": "How it was built",
+      "tech": "Technologies"
+    },
+    "pro": [
+      {
+        "title": "Multi-region hybrid private cloud",
+        "meta": "Convotis · Hamburg",
+        "context": "Secure private cloud across 3 regions in high availability: more than 30 clustered Proxmox nodes, switches, firewalls and internal applications.",
+        "did": [
+          "End-to-end monitoring of a strictly segmented environment."
+        ],
+        "tech": [
+          "Proxmox"
+        ]
+      },
+      {
+        "title": "Wazuh SIEM monitoring & CIS compliance",
+        "meta": "Convotis Maroc",
+        "context": "Wazuh SIEM platform and CIS compliance audits across a large workload estate.",
+        "did": [
+          "Centralised monitoring of Wazuh components through the Zabbix API.",
+          "Contributed, together with the Ansible team, to automating CIS audits and remediation across more than 300 workloads, cutting turnaround from several days to a few hours."
+        ],
+        "tech": [
+          "Wazuh",
+          "Zabbix API",
+          "CIS Benchmarks"
+        ]
+      }
+    ],
+    "perso": [
+      {
+        "title": "Automated video production pipeline",
+        "meta": "Personal project",
+        "diagram": true,
+        "context": "End-to-end automated system that turns comics into narrated videos, all the way to YouTube publication. More than 200 episodes processed.",
+        "did": [
+          "Six chained stages: image extraction, description by vision models, script generation, text-to-speech, video assembly and YouTube publication (API v3, OAuth).",
+          "Parallel pipeline architecture, automatic recovery after failures, and failover between several AI providers (local GPU and cloud gateway).",
+          "FastAPI operations web interface: queues, real-time tracking and GPU monitoring."
+        ],
+        "method": "I designed and directed the system: detailed specifications, review of every change as a GitHub pull request (40+ PRs), testing on real data and diagnosing failures from logs. Development itself was AI-assisted.",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "ffmpeg",
+          "AI models (vision, TTS)",
+          "YouTube Data API v3",
+          "OAuth"
+        ]
+      },
+      {
+        "title": "Home lab & tooling",
+        "meta": "Personal project",
+        "context": "Personal infrastructure for hosting AI models and services, reachable remotely without exposure to the internet.",
+        "did": [
+          "Local AI models on GPU and a multi-provider gateway.",
+          "Docker services and zero-trust remote access through Twingate, without exposure to the internet.",
+          "CLI utility that removes silences from videos (ffmpeg).",
+          "Windows control panel with real-time monitoring."
+        ],
+        "tech": [
+          "Docker",
+          "Twingate",
+          "Python",
+          "ffmpeg",
+          "Windows"
+        ]
+      }
+    ],
+    "diagram": {
+      "title": "Video pipeline architecture",
+      "desc": "Six stages in sequence: ingestion, vision model, script generation, text-to-speech, video assembly, publication. AI stages fail over between a local GPU and a cloud gateway.",
+      "steps": [
+        [
+          "Ingestion",
+          "image extraction"
+        ],
+        [
+          "Vision model",
+          "image description"
+        ],
+        [
+          "Script generation",
+          "narration text"
+        ],
+        [
+          "Text-to-speech",
+          "voice-over"
+        ],
+        [
+          "Video assembly",
+          "ffmpeg"
+        ],
+        [
+          "Publication",
+          "YouTube API v3, OAuth"
+        ]
+      ],
+      "aiBadge": "AI",
+      "legend": "AI: local GPU or cloud gateway, with automatic failover. Stages run in parallel and resume after failures."
+    }
+  },
+  "education": {
+    "title": "Education & certifications",
+    "items": [
+      {
+        "name": "Master’s in Cybersecurity",
+        "org": "ENSA Kénitra",
+        "dates": "2023 to 2025"
+      },
+      {
+        "name": "Bachelor’s in Information Systems and Networks (Licence)",
+        "org": "Ibn Tofail University, Kénitra",
+        "dates": "2021 to 2022"
+      },
+      {
+        "name": "PCAP: Programming Essentials in Python",
+        "org": "Certification",
+        "dates": "2021"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "open": "Open to opportunities in Morocco, France and remote.",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    },
+    "githubNote": "Most of my repositories are private.",
+    "cvButton": "Download my CV",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copiedAnnounce": "copied to clipboard"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
