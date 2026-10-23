@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
 import About from './About.astro';
+import Skills from './Skills.astro';
 
 const { t } = Astro.props;
 ---
@@ -12,5 +13,6 @@ const { t } = Astro.props;
     <div id="top"></div>
     <Hero t={t} />
     <About t={t} />
+    <Skills t={t} />
   </main>
 </Base>
