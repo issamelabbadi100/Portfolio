@@ -75,5 +75,81 @@
       "Ma spécialité est l’observabilité et l’automatisation. Je construis la supervision et les tableaux de bord sous Zabbix, Grafana et Prometheus, et j’automatise leur configuration en GitOps, avec GitLab CI/CD et NetBox comme source de vérité. Titulaire d’un Master en Cybersécurité, j’intègre la sécurité à l’exploitation : durcissement système, gestion des accès, surveillance des alertes.",
       "Je recherche un poste centré sur l’observabilité et l’automatisation, au Maroc, en France ou en télétravail. Arabe langue maternelle, je travaille au quotidien en français et en anglais."
     ]
+  },
+  "skills": {
+    "title": "Compétences",
+    "groups": [
+      {
+        "name": "Observabilité",
+        "items": [
+          "Zabbix",
+          "Grafana",
+          "Prometheus",
+          "Centreon",
+          "Eye of Network",
+          "Elasticsearch"
+        ]
+      },
+      {
+        "name": "Automatisation",
+        "items": [
+          "Python (PCAP)",
+          "Bash",
+          "NetBox",
+          "GitHub",
+          "GitLab CI/CD",
+          "cron"
+        ]
+      },
+      {
+        "name": "Systèmes",
+        "items": [
+          "Linux (RHEL, Debian, CentOS, Ubuntu)",
+          "Windows Server",
+          "Active Directory"
+        ]
+      },
+      {
+        "name": "Cloud & virtualisation",
+        "items": [
+          "AWS (EC2, VPC, Route 53)",
+          "VMware",
+          "Proxmox (Qemu/KVM)",
+          "Hyper-V",
+          "Docker",
+          "Kubernetes"
+        ]
+      },
+      {
+        "name": "Web & données",
+        "items": [
+          "Traefik",
+          "Apache",
+          "Nginx",
+          "MySQL/MariaDB",
+          "PostgreSQL",
+          "Redis"
+        ]
+      },
+      {
+        "name": "Exploitation",
+        "items": [
+          "Support N2/N3",
+          "Gestion des incidents et des changements",
+          "Analyses de causes racines",
+          "SLA",
+          "Runbooks"
+        ]
+      },
+      {
+        "name": "Sécurité",
+        "items": [
+          "Durcissement système",
+          "WAF",
+          "Gestion des accès",
+          "Surveillance des alertes"
+        ]
+      }
+    ]
   }
 }
