@@ -26,7 +26,7 @@ const height = 8 + (d.steps.length - 1) * step + boxH + 8;
                   <rect x={bx} y={y} width={hw} height={boxH} rx="6" class="box" />
                   <text x={bx + 14} y={y + 24} class="label">{label}</text>
                   <text x={bx + 14} y={y + 43} class="sub">{sub}</text>
-                  <line x1={bx + hw / 2} y1={y + boxH} x2={160 + (j ? 14 : -14)} y2={y + step - 3} class="arrow" marker-end={`url(#${key}-arrow)`} />
+                  <line x1={bx + hw / 2} y1={y + boxH} x2={bx + hw / 2} y2={y + step - 3} class="arrow" marker-end={`url(#${key}-arrow)`} />
                 </g>
               );
             })}
