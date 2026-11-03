@@ -235,16 +235,45 @@
     },
     "pro": [
       {
-        "title": "Carte de topologie réseau multi-datacenters",
+        "title": "Carte réseau multi-datacenters",
         "meta": "Environnement client",
-        "context": "Carte réseau en direct pour superviser les liens entre trois datacenters. Les données suivent une seule chaîne : NetBox ou la CI/CD alimente Zabbix, puis Grafana lit directement la base de données Zabbix.",
+        "diagram": "network",
+        "context": "Carte en direct des liens entre trois datacenters, construite dans Grafana sur la base de données Zabbix.",
+        "stats": [
+          [
+            "3",
+            "datacenters"
+          ],
+          [
+            "12",
+            "liens fibre suivis"
+          ],
+          [
+            "1",
+            "source de vérité"
+          ]
+        ],
         "did": [
-          "Inventaire (sites, équipements, liens) envoyé dans Zabbix depuis NetBox ou la CI/CD, sans saisie manuelle.",
-          "Base de données Zabbix connectée à Grafana comme source SQL, pour construire la carte sur les données brutes de supervision.",
-          "3 datacenters placés sur une vraie carte. Chaque site affiche un indicateur unique de santé de son cluster d’hyperviseurs, avec le détail par nœud au survol.",
-          "Les 12 liens fibre entre sites sont tracés un par un et écartés les uns des autres, pour que chaque câble reste visible et survolable.",
-          "Métriques en direct par câble : débit entrant et sortant, capacité du lien et état de santé calculé sur des seuils de trafic. Vert = sain, rouge = sous le seuil.",
-          "Tableaux de bord Zabbix en complément : débit par trunk, chemins LAN et WAN séparés, sans double comptage des interfaces agrégées ou virtuelles."
+          [
+            "Chaîne de données :",
+            "NetBox ou la CI/CD alimente Zabbix, puis Grafana lit directement la base Zabbix en SQL."
+          ],
+          [
+            "Vue par site :",
+            "chaque datacenter affiche un indicateur unique de santé de son cluster d’hyperviseurs, avec le détail par nœud au survol."
+          ],
+          [
+            "Lien par lien :",
+            "les 12 câbles fibre sont tracés séparément et écartés pour rester visibles et survolables."
+          ],
+          [
+            "Métriques en direct :",
+            "débit entrant et sortant, capacité et état de chaque câble. Vert = sain, rouge = sous le seuil."
+          ],
+          [
+            "Tableaux de bord Zabbix :",
+            "débit par trunk, LAN et WAN séparés, sans double comptage des interfaces agrégées ou virtuelles."
+          ]
         ],
         "method": "Seul concepteur et réalisateur.",
         "tech": [
@@ -256,8 +285,7 @@
           "Grafana",
           "SNMP",
           "Proxmox VE"
-        ],
-        "diagram": "network"
+        ]
       },
       {
         "title": "Cloud privé hybride multi-régions",

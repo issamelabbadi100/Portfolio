@@ -235,16 +235,45 @@
     },
     "pro": [
       {
-        "title": "Multi-Datacenter Network Topology Map",
+        "title": "Multi-Datacenter Network Map",
         "meta": "Client environment",
-        "context": "Live network map to monitor the links between three datacenters. The data follows a single chain: NetBox or CI/CD feeds Zabbix, then Grafana reads the Zabbix database directly.",
+        "diagram": "network",
+        "context": "Live map of the links between three datacenters, built in Grafana on top of the Zabbix database.",
+        "stats": [
+          [
+            "3",
+            "datacenters"
+          ],
+          [
+            "12",
+            "fibre links tracked"
+          ],
+          [
+            "1",
+            "source of truth"
+          ]
+        ],
         "did": [
-          "Inventory (sites, devices, links) pushed into Zabbix from NetBox or CI/CD, with no manual entry.",
-          "Zabbix database connected to Grafana as an SQL data source, so the map is built on the raw monitoring data.",
-          "3 datacenters placed on a real map. Each site shows a single health indicator for its hypervisor cluster, with per-node detail on hover.",
-          "All 12 inter-site fibre links are drawn one by one and fanned apart, so every cable stays visible and hoverable.",
-          "Live metrics per cable: inbound and outbound throughput, link capacity and a health state based on traffic thresholds. Green = healthy, red = below threshold.",
-          "Supporting Zabbix dashboards: throughput per trunk, LAN and WAN paths kept separate, no double counting of bonded or virtual interfaces."
+          [
+            "Data chain:",
+            "NetBox or CI/CD feeds Zabbix, then Grafana reads the Zabbix database directly over SQL."
+          ],
+          [
+            "Per-site view:",
+            "each datacenter shows a single health indicator for its hypervisor cluster, with per-node detail on hover."
+          ],
+          [
+            "Link by link:",
+            "all 12 fibre cables are drawn separately and fanned apart so each stays visible and hoverable."
+          ],
+          [
+            "Live metrics:",
+            "inbound and outbound throughput, capacity and state for every cable. Green = healthy, red = below threshold."
+          ],
+          [
+            "Zabbix dashboards:",
+            "throughput per trunk, LAN and WAN kept separate, no double counting of bonded or virtual interfaces."
+          ]
         ],
         "method": "Sole designer and implementer.",
         "tech": [
@@ -256,8 +285,7 @@
           "Grafana",
           "SNMP",
           "Proxmox VE"
-        ],
-        "diagram": "network"
+        ]
       },
       {
         "title": "Multi-region hybrid private cloud",
