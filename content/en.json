@@ -235,6 +235,60 @@
     },
     "pro": [
       {
+        "title": "Multi-Datacenter Network Map",
+        "meta": "Client environment",
+        "diagram": "network",
+        "context": "Live map of the links between three datacenters, built in Grafana on top of the Zabbix database.",
+        "stats": [
+          [
+            "3",
+            "datacenters"
+          ],
+          [
+            "12",
+            "fibre links tracked"
+          ],
+          [
+            "1",
+            "source of truth"
+          ]
+        ],
+        "did": [
+          [
+            "Data chain:",
+            "NetBox (source of truth) and GitLab CI/CD (GitOps automation) feed Zabbix, then Grafana reads the Zabbix database directly over SQL."
+          ],
+          [
+            "Per-site view:",
+            "each datacenter shows a single health indicator for its hypervisor cluster, with per-node detail on hover."
+          ],
+          [
+            "Link by link:",
+            "all 12 fibre cables are drawn separately and fanned apart so each stays visible and hoverable."
+          ],
+          [
+            "Live metrics:",
+            "inbound and outbound throughput, capacity and state for every cable. Green = healthy, red = below threshold."
+          ],
+          [
+            "Zabbix dashboards:",
+            "throughput per trunk, LAN and WAN kept separate, no double counting of bonded or virtual interfaces."
+          ]
+        ],
+        "method": "Sole designer and implementer.",
+        "tech": [
+          "NetBox",
+          "CI/CD",
+          "Zabbix",
+          "MySQL/MariaDB",
+          "SQL",
+          "Grafana",
+          "MapGL",
+          "SNMP",
+          "Proxmox VE"
+        ]
+      },
+      {
         "title": "Multi-region hybrid private cloud",
         "meta": "Convotis · Hamburg",
         "context": "Secure private cloud across 3 regions in high availability: more than 30 clustered Proxmox nodes, switches, firewalls and internal applications.",
@@ -251,36 +305,12 @@
         "context": "Wazuh SIEM platform and CIS compliance audits across a large workload estate.",
         "did": [
           "Centralised monitoring of Wazuh components through the Zabbix API.",
-          "Contributed, together with the Ansible team, to automating CIS audits and remediation across more than 300 workloads, cutting turnaround from several days to a few hours."
+          "Automated CIS audits and remediation across more than 300 workloads with the Ansible team: from several days down to a few hours."
         ],
         "tech": [
           "Wazuh",
           "Zabbix API",
           "CIS Benchmarks"
-        ]
-      },
-      {
-        "title": "Geographic Network Topology Map for Multi-Datacenter Monitoring",
-        "meta": "Client environment",
-        "context": "Live geographic network map and supporting dashboards to monitor inter-datacenter links across three sites, combining Zabbix as the data source with a custom Grafana visualisation.",
-        "did": [
-          "Designed and built a geographic network topology map in Grafana, fed directly from a Zabbix monitoring database via SQL.",
-          "Three datacenter sites rendered on a real map, each aggregating its hypervisor cluster health into a single status indicator, with per-node drill-down in the tooltip.",
-          "All 12 physical inter-site fibre links drawn individually rather than as one aggregated line, using computed waypoint geometry to fan parallel cables apart so each stays independently visible and hoverable.",
-          "Per-cable live metrics — receive/transmit throughput, link capacity and a health state derived from traffic thresholds — with colour-coded links (green healthy, red below threshold).",
-          "Complementary Zabbix dashboards aggregating per-trunk throughput, separating LAN and WAN paths, with careful interface aggregation to avoid double-counting bonded and virtual interfaces."
-        ],
-        "method": "Sole designer and implementer.",
-        "tech": [
-          "Grafana",
-          "Zabbix",
-          "MySQL/MariaDB",
-          "SNMP",
-          "SQL",
-          "Proxmox VE",
-          "Network monitoring",
-          "Observability",
-          "Data visualisation"
         ]
       }
     ],
@@ -288,7 +318,7 @@
       {
         "title": "Manhwa Chapter Chaser",
         "meta": "Personal project · Flagship",
-        "diagram": true,
+        "diagram": "pipeline",
         "context": "End-to-end pipeline that turns manhwa and webtoon chapters into narrated recap videos for my YouTube channel. Stages run as a queued “conveyor belt”, from raw panels to a published video.",
         "did": [
           "Chained stages: panel download and splitting, vision-LLM panel descriptions, outline, LLM-written narration, Edge-TTS voiceover, and a video build with silence cutting, chapters and thumbnails.",
@@ -365,37 +395,76 @@
         ]
       }
     ],
-    "diagram": {
-      "title": "Video pipeline architecture",
-      "desc": "Six stages in sequence: ingestion, vision model, script generation, text-to-speech, video assembly, publication. AI stages fail over between a local GPU and a cloud gateway.",
-      "steps": [
-        [
-          "Ingestion",
-          "image extraction"
+    "diagrams": {
+      "pipeline": {
+        "title": "Video pipeline architecture",
+        "desc": "Six stages in sequence: ingestion, vision model, script generation, text-to-speech, video assembly, publication. AI stages fail over between a local GPU and a cloud gateway.",
+        "steps": [
+          [
+            "Ingestion",
+            "image extraction"
+          ],
+          [
+            "Vision model",
+            "image description",
+            "AI"
+          ],
+          [
+            "Script generation",
+            "narration text",
+            "AI"
+          ],
+          [
+            "Text-to-speech",
+            "voice-over",
+            "AI"
+          ],
+          [
+            "Video assembly",
+            "ffmpeg"
+          ],
+          [
+            "Publication",
+            "YouTube API v3, OAuth"
+          ]
         ],
-        [
-          "Vision model",
-          "image description"
+        "legend": "AI: local GPU or cloud gateway, with automatic failover. Stages run in parallel and resume after failures."
+      },
+      "network": {
+        "title": "Network map data chain",
+        "desc": "Two sources feed Zabbix: NetBox, the source of truth, and GitLab CI/CD for GitOps automation. Zabbix collects over SNMP and stores in its MySQL/MariaDB database, then Grafana reads that database over SQL and renders the map in the MapGL panel.",
+        "steps": [
+          [
+            [
+              "NetBox",
+              "source of truth"
+            ],
+            [
+              "CI/CD",
+              "GitLab, GitOps"
+            ]
+          ],
+          [
+            "Zabbix",
+            "collection, thresholds",
+            "SNMP"
+          ],
+          [
+            "Zabbix database",
+            "MySQL/MariaDB"
+          ],
+          [
+            "Grafana",
+            "direct database read",
+            "SQL"
+          ],
+          [
+            "MapGL",
+            "3 sites, 12 fibre links"
+          ]
         ],
-        [
-          "Script generation",
-          "narration text"
-        ],
-        [
-          "Text-to-speech",
-          "voice-over"
-        ],
-        [
-          "Video assembly",
-          "ffmpeg"
-        ],
-        [
-          "Publication",
-          "YouTube API v3, OAuth"
-        ]
-      ],
-      "aiBadge": "AI",
-      "legend": "AI: local GPU or cloud gateway, with automatic failover. Stages run in parallel and resume after failures."
+        "legend": "NetBox and GitLab CI/CD feed Zabbix, Grafana reads the Zabbix database over SQL. Green = healthy link, red = below threshold."
+      }
     }
   },
   "education": {
