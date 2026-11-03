@@ -26,7 +26,7 @@ const l = t.projects.labels;
             <h4 class="visually-hidden">{l.tech}</h4>
             <ul class="tech mono">{p.tech.map((x) => <li>{x}</li>)}</ul>
           </div>
-          {p.diagram && <PipelineDiagram d={t.projects.diagram} />}
+          {p.diagram && <PipelineDiagram d={t.projects.diagrams[p.diagram]} key={`${id}-${p.diagram}`} />}
         </article>
       ))}
     </div>

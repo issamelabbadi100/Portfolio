@@ -235,6 +235,31 @@
     },
     "pro": [
       {
+        "title": "Carte de topologie réseau multi-datacenters",
+        "meta": "Environnement client",
+        "context": "Carte réseau en direct pour superviser les liens entre trois datacenters. Les données suivent une seule chaîne : NetBox ou la CI/CD alimente Zabbix, puis Grafana lit directement la base de données Zabbix.",
+        "did": [
+          "Inventaire (sites, équipements, liens) envoyé dans Zabbix depuis NetBox ou la CI/CD, sans saisie manuelle.",
+          "Base de données Zabbix connectée à Grafana comme source SQL, pour construire la carte sur les données brutes de supervision.",
+          "3 datacenters placés sur une vraie carte. Chaque site affiche un indicateur unique de santé de son cluster d’hyperviseurs, avec le détail par nœud au survol.",
+          "Les 12 liens fibre entre sites sont tracés un par un et écartés les uns des autres, pour que chaque câble reste visible et survolable.",
+          "Métriques en direct par câble : débit entrant et sortant, capacité du lien et état de santé calculé sur des seuils de trafic. Vert = sain, rouge = sous le seuil.",
+          "Tableaux de bord Zabbix en complément : débit par trunk, chemins LAN et WAN séparés, sans double comptage des interfaces agrégées ou virtuelles."
+        ],
+        "method": "Seul concepteur et réalisateur.",
+        "tech": [
+          "NetBox",
+          "CI/CD",
+          "Zabbix",
+          "MySQL/MariaDB",
+          "SQL",
+          "Grafana",
+          "SNMP",
+          "Proxmox VE"
+        ],
+        "diagram": "network"
+      },
+      {
         "title": "Cloud privé hybride multi-régions",
         "meta": "Convotis · Hambourg",
         "context": "Cloud privé sécurisé sur 3 régions en haute disponibilité : plus de 30 nœuds Proxmox en cluster, switches, pare-feux et applications internes.",
@@ -251,36 +276,12 @@
         "context": "Plateforme SIEM Wazuh et audits de conformité CIS sur un large parc de workloads.",
         "did": [
           "Supervision centralisée des composants Wazuh via l’API Zabbix.",
-          "Contribution, avec l’équipe Ansible, à l’automatisation des audits CIS et de la remédiation sur plus de 300 workloads, ramenant les délais de plusieurs jours à quelques heures."
+          "Automatisation des audits CIS et de la remédiation sur plus de 300 workloads, avec l’équipe Ansible : de plusieurs jours à quelques heures."
         ],
         "tech": [
           "Wazuh",
           "Zabbix API",
           "CIS Benchmarks"
-        ]
-      },
-      {
-        "title": "Carte géographique de topologie réseau pour supervision multi-datacenters",
-        "meta": "Environnement client",
-        "context": "Carte réseau géographique en direct et tableaux de bord associés pour superviser les liens inter-datacenters sur trois sites, combinant Zabbix comme source de données et une visualisation Grafana sur mesure.",
-        "did": [
-          "Conception et réalisation d’une carte géographique de topologie réseau dans Grafana, alimentée directement par une base de données de supervision Zabbix via SQL.",
-          "Trois sites de datacenter représentés sur une vraie carte, chacun agrégeant l’état de santé de son cluster d’hyperviseurs en un indicateur unique, avec exploration par nœud dans l’infobulle.",
-          "Les 12 liens fibre physiques inter-sites tracés individuellement plutôt qu’en une seule ligne agrégée, avec une géométrie de points de passage calculée pour écarter les câbles parallèles afin que chacun reste visible et survolable.",
-          "Métriques en direct par câble — débit en réception/émission, capacité du lien et état de santé dérivé de seuils de trafic — avec des liens colorés (vert = sain, rouge = sous le seuil).",
-          "Tableaux de bord Zabbix complémentaires agrégeant le débit par trunk, séparant les chemins LAN et WAN, avec un traitement soigné de l’agrégation des interfaces pour éviter de compter deux fois les interfaces bondées et virtuelles."
-        ],
-        "method": "Seul concepteur et réalisateur.",
-        "tech": [
-          "Grafana",
-          "Zabbix",
-          "MySQL/MariaDB",
-          "SNMP",
-          "SQL",
-          "Proxmox VE",
-          "Supervision réseau",
-          "Observabilité",
-          "Visualisation de données"
         ]
       }
     ],
@@ -288,7 +289,7 @@
       {
         "title": "Manhwa Chapter Chaser",
         "meta": "Projet personnel · Projet phare",
-        "diagram": true,
+        "diagram": "pipeline",
         "context": "Pipeline de bout en bout qui transforme des chapitres de manhwa et de webtoon en vidéos de résumé narrées pour ma chaîne YouTube. Les traitements s’enchaînent sur un « tapis roulant » en file d’attente, des planches brutes à la vidéo publiée.",
         "did": [
           "Étapes enchaînées : téléchargement et découpage des planches, description des planches par LLM de vision, plan, narration rédigée par LLM, voix off Edge-TTS, puis montage vidéo avec suppression des silences, chapitres et miniatures.",
@@ -365,37 +366,70 @@
         ]
       }
     ],
-    "diagram": {
-      "title": "Architecture du pipeline vidéo",
-      "desc": "Six étapes en séquence : ingestion, modèle de vision, génération de script, synthèse vocale, montage vidéo, publication. Les étapes IA basculent entre GPU local et passerelle cloud.",
-      "steps": [
-        [
-          "Ingestion",
-          "extraction d’images"
+    "diagrams": {
+      "pipeline": {
+        "title": "Architecture du pipeline vidéo",
+        "desc": "Six étapes en séquence : ingestion, modèle de vision, génération de script, synthèse vocale, montage vidéo, publication. Les étapes IA basculent entre GPU local et passerelle cloud.",
+        "steps": [
+          [
+            "Ingestion",
+            "extraction d’images"
+          ],
+          [
+            "Modèle de vision",
+            "description des images",
+            "IA"
+          ],
+          [
+            "Génération de script",
+            "texte de narration",
+            "IA"
+          ],
+          [
+            "Synthèse vocale",
+            "voix off",
+            "IA"
+          ],
+          [
+            "Montage vidéo",
+            "ffmpeg"
+          ],
+          [
+            "Publication",
+            "YouTube API v3, OAuth"
+          ]
         ],
-        [
-          "Modèle de vision",
-          "description des images"
+        "legend": "IA : GPU local ou passerelle cloud, avec bascule automatique. Étapes parallélisées, reprise après incident."
+      },
+      "network": {
+        "title": "Chaîne de données de la carte réseau",
+        "desc": "Cinq étapes : NetBox ou la CI/CD alimente Zabbix, Zabbix collecte en SNMP et stocke dans sa base MySQL/MariaDB, Grafana lit cette base en SQL et affiche la carte géographique.",
+        "steps": [
+          [
+            "NetBox ou CI/CD",
+            "sites, équipements, liens"
+          ],
+          [
+            "Zabbix",
+            "collecte, seuils",
+            "SNMP"
+          ],
+          [
+            "Base Zabbix",
+            "MySQL/MariaDB"
+          ],
+          [
+            "Grafana",
+            "lecture directe de la base",
+            "SQL"
+          ],
+          [
+            "Carte géographique",
+            "3 sites, 12 liens fibre"
+          ]
         ],
-        [
-          "Génération de script",
-          "texte de narration"
-        ],
-        [
-          "Synthèse vocale",
-          "voix off"
-        ],
-        [
-          "Montage vidéo",
-          "ffmpeg"
-        ],
-        [
-          "Publication",
-          "YouTube API v3, OAuth"
-        ]
-      ],
-      "aiBadge": "IA",
-      "legend": "IA : GPU local ou passerelle cloud, avec bascule automatique. Étapes parallélisées, reprise après incident."
+        "legend": "Une seule source de vérité : l’inventaire vient de NetBox ou de la CI/CD, Zabbix supervise, Grafana lit la base Zabbix. Vert = lien sain, rouge = sous le seuil."
+      }
     }
   },
   "education": {
