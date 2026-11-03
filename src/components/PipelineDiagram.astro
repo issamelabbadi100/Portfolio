@@ -1,5 +1,5 @@
 ---
-// d.steps: [label, sub, badge?]. `key` keeps SVG ids unique when several diagrams share a page.
+// d.steps: [label, sub, badge?], or [[label, sub], [label, sub]] for two parallel sources. `key` keeps SVG ids unique when several diagrams share a page.
 const { d, key } = Astro.props;
 const step = 84, boxH = 56, x = 16, w = 288;
 const height = 8 + (d.steps.length - 1) * step + boxH + 8;
@@ -13,14 +13,35 @@ const height = 8 + (d.steps.length - 1) * step + boxH + 8;
         <path d="M0 0 10 5 0 10z" class="arrow-head" />
       </marker>
     </defs>
-    {d.steps.map(([label, sub, badge], i) => {
+    {d.steps.map((s, i) => {
       const y = 8 + i * step;
+      if (Array.isArray(s[0])) {
+        const hw = (w - 16) / 2;
+        return (
+          <g>
+            {s.map(([label, sub], j) => {
+              const bx = x + j * (hw + 16);
+              return (
+                <g>
+                  <rect x={bx} y={y} width={hw} height={boxH} rx="6" class="box" />
+                  <text x={bx + 14} y={y + 24} class="label">{label}</text>
+                  <text x={bx + 14} y={y + 43} class="sub">{sub}</text>
+                  <line x1={bx + hw / 2} y1={y + boxH} x2={160 + (j ? 14 : -14)} y2={y + step - 3} class="arrow" marker-end={`url(#${key}-arrow)`} />
+                </g>
+              );
+            })}
+          </g>
+        );
+      }
+      const [label, sub, badge] = s;
+      const num = d.steps.slice(0, i + 1).filter((t) => !Array.isArray(t[0])).length;
+      const parallelAbove = i > 0 && Array.isArray(d.steps[i - 1][0]);
       const bw = 14 + badge?.length * 7;
       return (
         <g>
-          {i > 0 && <line x1="160" y1={y - step + boxH} x2="160" y2={y - 3} class="arrow" marker-end={`url(#${key}-arrow)`} />}
+          {i > 0 && !parallelAbove && <line x1="160" y1={y - step + boxH} x2="160" y2={y - 3} class="arrow" marker-end={`url(#${key}-arrow)`} />}
           <rect x={x} y={y} width={w} height={boxH} rx="6" class="box" />
-          <text x={x + 16} y={y + 33} class="num">{String(i + 1).padStart(2, '0')}</text>
+          <text x={x + 16} y={y + 33} class="num">{String(num).padStart(2, '0')}</text>
           <text x={x + 48} y={y + 24} class="label">{label}</text>
           <text x={x + 48} y={y + 43} class="sub">{sub}</text>
           {badge && (

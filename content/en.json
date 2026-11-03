@@ -256,7 +256,7 @@
         "did": [
           [
             "Data chain:",
-            "NetBox or CI/CD feeds Zabbix, then Grafana reads the Zabbix database directly over SQL."
+            "NetBox (source of truth) and GitLab CI/CD (GitOps automation) feed Zabbix, then Grafana reads the Zabbix database directly over SQL."
           ],
           [
             "Per-site view:",
@@ -431,11 +431,17 @@
       },
       "network": {
         "title": "Network map data chain",
-        "desc": "Five stages: NetBox or CI/CD feeds Zabbix, Zabbix collects over SNMP and stores in its MySQL/MariaDB database, Grafana reads that database over SQL and renders the geographic map.",
+        "desc": "Two sources feed Zabbix: NetBox, the source of truth, and GitLab CI/CD for GitOps automation. Zabbix collects over SNMP and stores in its MySQL/MariaDB database, then Grafana reads that database over SQL and renders the geographic map.",
         "steps": [
           [
-            "NetBox or CI/CD",
-            "sites, devices, links"
+            [
+              "NetBox",
+              "source of truth"
+            ],
+            [
+              "CI/CD",
+              "GitLab, GitOps"
+            ]
           ],
           [
             "Zabbix",
@@ -448,7 +454,7 @@
           ],
           [
             "Grafana",
-            "reads the database directly",
+            "direct database read",
             "SQL"
           ],
           [
@@ -456,7 +462,7 @@
             "3 sites, 12 fibre links"
           ]
         ],
-        "legend": "One source of truth: inventory comes from NetBox or CI/CD, Zabbix monitors, Grafana reads the Zabbix database. Green = healthy link, red = below threshold."
+        "legend": "NetBox and GitLab CI/CD feed Zabbix, Grafana reads the Zabbix database over SQL. Green = healthy link, red = below threshold."
       }
     }
   },
