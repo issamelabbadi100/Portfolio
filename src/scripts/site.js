@@ -1,23 +1,27 @@
-// All page behaviour: theme toggle, language switch animation, copy buttons,
-// fade-in on scroll and nav scroll-spy. Bundled by Astro, runs after parse.
+// All page behaviour: theme toggle, language switch (client-side via view
+// transitions), copy buttons, fade-in on scroll and nav scroll-spy.
+//
+// The language switch keeps separate /(FR) and /en/(EN) URLs but navigates
+// between them with Astro's ClientRouter instead of a full reload, so the
+// sticky header persists and the typing animation runs uninterrupted.
+
+import { navigate } from 'astro:transitions/client';
 
 const root = document.documentElement;
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SWITCH_KEY = 'lang-switch';
 
-/* ---------- Typewriter: erase / retype the text nodes in view ---------- */
+/* ---------- Typewriter: erase / retype the text nodes of <main> in view ---------- */
 
-// Text nodes inside main and the header nav that are currently on screen.
 function textNodesInView() {
   const nodes = [];
-  for (const scope of document.querySelectorAll('main, .site-header nav')) {
-    const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT, {
-      acceptNode: (n) => (n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
-    });
-    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
-      const r = n.parentElement.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < innerHeight && r.width > 0) nodes.push({ node: n, top: r.top });
-    }
+  const main = document.querySelector('main');
+  if (!main) return nodes;
+  const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => (n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+  });
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+    const r = n.parentElement.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight && r.width > 0) nodes.push({ node: n, top: r.top });
   }
   return nodes;
 }
@@ -63,10 +67,9 @@ function animate(items, from, to, duration) {
   });
 }
 
-let erased = [];
+/* ---------- Reopen the other language at the same scroll position ---------- */
 
-// Remember the first text block below the header so the other language opens
-// at the same place. Both pages share one structure, so the index matches.
+// Both languages share one structure, so the Nth text block maps across pages.
 const ANCHORS = 'main h1, main h2, main h3, main p, main li';
 function anchorPoint() {
   const header = document.querySelector('.site-header').offsetHeight;
@@ -74,51 +77,53 @@ function anchorPoint() {
   const index = all.findIndex((el) => el.getBoundingClientRect().top >= header);
   return index < 0 ? null : { index, delta: all[index].getBoundingClientRect().top };
 }
+function restoreAnchor(saved) {
+  if (!saved) return;
+  const el = document.querySelectorAll(ANCHORS)[saved.index];
+  if (el) scrollTo({ top: el.getBoundingClientRect().top + scrollY - saved.delta, behavior: 'instant' });
+}
+
+/* ---------- Language switch ---------- */
+
+let pending = null; // set when a switch starts, consumed after the swap
 
 async function switchLanguage(link) {
-  try {
-    localStorage.setItem('lang', link.dataset.lang);
-    sessionStorage.setItem(SWITCH_KEY, JSON.stringify(anchorPoint()));
-  } catch (e) {}
-  link.classList.add('is-moving');
-  if (!reduceMotion) {
-    erased = wrap(textNodesInView(), true);
-    await animate(erased, 1, 0, 350);
-  }
-  location.href = link.href;
+  try { localStorage.setItem('lang', link.dataset.lang); } catch (e) {}
+  link.classList.add('is-moving'); // slides the toggle thumb to the other language
+  pending = anchorPoint();
+  if (!reduceMotion) await animate(wrap(textNodesInView(), true), 1, 0, 350);
+  navigate(link.href);
 }
 
-// Arriving from a language switch: restore position, then type the text in.
-async function arriveFromSwitch() {
-  let saved;
-  try {
-    saved = JSON.parse(sessionStorage.getItem(SWITCH_KEY));
-    sessionStorage.removeItem(SWITCH_KEY);
-  } catch (e) {}
-  if (saved === undefined) return;
-  const el = saved && document.querySelectorAll(ANCHORS)[saved.index];
-  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - saved.delta, behavior: 'instant' });
-  if (!root.classList.contains('tw-pending')) return;
-  const items = wrap(textNodesInView(), false);
-  root.classList.remove('tw-pending');
-  await animate(items, 0, 1, 500);
-  items.forEach((it) => it.restore());
-}
-
-// Back button restores this page from cache: undo the erase.
-addEventListener('pageshow', (e) => {
-  if (!e.persisted) return;
-  erased.forEach((it) => it.restore());
-  erased = [];
-  document.querySelectorAll('.lang-switch.is-moving').forEach((l) => l.classList.remove('is-moving'));
+// The header is persisted (transition:persist), so it keeps the old language.
+// Copy the incoming page's header markup in before the swap so its labels,
+// the language toggle and the theme button all update.
+document.addEventListener('astro:before-swap', (e) => {
+  const cur = document.querySelector('.site-header');
+  const next = e.newDocument.querySelector('.site-header');
+  if (cur && next) cur.innerHTML = next.innerHTML;
 });
 
-/* ---------- Clicks ---------- */
+// After the swap: restore scroll to the same place, then type the new text in.
+document.addEventListener('astro:after-swap', () => {
+  if (pending === null) return;
+  const saved = pending;
+  pending = null;
+  restoreAnchor(saved);
+  if (reduceMotion) return;
+  const items = wrap(textNodesInView(), false);
+  animate(items, 0, 1, 500).then(() => items.forEach((it) => it.restore()));
+});
 
+/* ---------- Clicks (delegated on document, so they survive swaps) ---------- */
+
+// Capture phase: intercept the language link before ClientRouter's own click
+// handler so our erase animation runs, then we drive the navigation ourselves.
 document.addEventListener('click', (e) => {
   const lang = e.target.closest('[data-lang]');
   if (lang && !(e.ctrlKey || e.metaKey || e.shiftKey || e.button)) {
     e.preventDefault();
+    e.stopPropagation();
     switchLanguage(lang);
     return;
   }
@@ -140,33 +145,41 @@ document.addEventListener('click', (e) => {
       setTimeout(() => { label.textContent = original; btn.classList.remove('done'); }, 2000);
     });
   }
-});
+}, true);
 
-// Copy buttons only appear where the Clipboard API is available (HTTPS or localhost).
-if (navigator.clipboard) {
-  document.querySelectorAll('[data-copy]').forEach((b) => { b.hidden = false; });
+/* ---------- Per-page setup: copy visibility, fade-in, scroll-spy ---------- */
+// Re-run on every page load AND after each view transition, because <main>
+// (and the persisted header's inner markup) is replaced each time.
+
+let revealIO, spyIO;
+
+function setup() {
+  // Copy buttons only appear where the Clipboard API is available (HTTPS or localhost).
+  if (navigator.clipboard) {
+    document.querySelectorAll('[data-copy]').forEach((b) => { b.hidden = false; });
+  }
+
+  revealIO?.disconnect();
+  revealIO = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (en.isIntersecting) { en.target.classList.add('is-visible'); revealIO.unobserve(en.target); }
+    }
+  }, { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
+
+  // Highlight the nav link of the section crossing the middle of the viewport.
+  spyIO?.disconnect();
+  spyIO = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      document.querySelectorAll('[data-spy]').forEach((a) => {
+        if (a.dataset.spy === en.target.dataset.nav) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('[data-nav]').forEach((s) => spyIO.observe(s));
 }
 
-/* ---------- Fade-in and scroll-spy ---------- */
-
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  for (const en of entries) {
-    if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
-  }
-}, { rootMargin: '0px 0px -10% 0px' });
-reveals.forEach((el) => io.observe(el));
-
-// Highlight the nav link of the section crossing the middle of the viewport.
-const spy = new IntersectionObserver((entries) => {
-  for (const en of entries) {
-    if (!en.isIntersecting) continue;
-    document.querySelectorAll('[data-spy]').forEach((a) => {
-      if (a.dataset.spy === en.target.dataset.nav) a.setAttribute('aria-current', 'true');
-      else a.removeAttribute('aria-current');
-    });
-  }
-}, { rootMargin: '-45% 0px -50% 0px' });
-document.querySelectorAll('[data-nav]').forEach((s) => spy.observe(s));
-
-arriveFromSwitch();
+// Fires on the initial load and after every ClientRouter navigation.
+document.addEventListener('astro:page-load', setup);

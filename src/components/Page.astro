@@ -14,7 +14,7 @@ const { t } = Astro.props;
 ---
 <Base t={t}>
   <Header t={t} />
-  <main id="main" tabindex="-1">
+  <main id="main" tabindex="-1" transition:animate="none">
     <div id="top"></div>
     <Hero t={t} />
     <About t={t} />

@@ -148,5 +148,3 @@ ul { padding-left: 1.2rem; }
 
 /* Language switch typewriter: hidden characters keep their space. */
 .tw-off { visibility: hidden; }
-.tw-pending main,
-.tw-pending .site-header nav { visibility: hidden; }
