@@ -148,6 +148,19 @@
           "Gestion des accès",
           "Surveillance des alertes"
         ]
+      },
+      {
+        "name": "IA & automatisation",
+        "items": [
+          "Python",
+          "ffmpeg",
+          "Intégration de LLM (local + cloud)",
+          "Prompt engineering",
+          "Pipelines d’automatisation",
+          "Développement assisté par IA (Claude Code)",
+          "Outils desktop Windows",
+          "Supervision & observabilité"
+        ]
       }
     ]
   },
@@ -246,41 +259,82 @@
     ],
     "perso": [
       {
-        "title": "Pipeline automatisé de production vidéo",
-        "meta": "Projet personnel",
+        "title": "Manhwa Chapter Chaser",
+        "meta": "Projet personnel · Projet phare",
         "diagram": true,
-        "context": "Système automatisé de bout en bout qui transforme des bandes dessinées en vidéos narrées, jusqu’à la publication YouTube. Plus de 200 épisodes traités.",
+        "context": "Pipeline de bout en bout qui transforme des chapitres de manhwa et de webtoon en vidéos de résumé narrées pour ma chaîne YouTube. Les traitements s’enchaînent sur un « tapis roulant » en file d’attente, des planches brutes à la vidéo publiée.",
         "did": [
-          "Six étapes enchaînées : extraction d’images, description par modèles de vision, génération de script, synthèse vocale, montage vidéo et publication YouTube (API v3, OAuth).",
-          "Architecture en pipeline parallèle, reprise automatique après incident et bascule entre plusieurs fournisseurs d’IA (GPU local et passerelle cloud).",
-          "Interface web d’exploitation sous FastAPI : files d’attente, suivi temps réel et supervision du GPU."
+          "Étapes enchaînées : téléchargement et découpage des planches, description des planches par LLM de vision, plan, narration rédigée par LLM, voix off Edge-TTS, puis montage vidéo avec suppression des silences, chapitres et miniatures.",
+          "Une « mémoire » par série (personnages, arcs, événements récents) garde la narration cohérente d’un épisode à l’autre.",
+          "Génération automatique des métadonnées de publication (titres, descriptions avec chapitres et crédits, tags, deux miniatures), plus des YouTube Shorts et des compilations multi-épisodes.",
+          "Dispositif d’IA hybride : modèles locaux et modèles cloud via une passerelle multi-fournisseurs, avec bascules et nouvelles tentatives en cas de limitation de débit.",
+          "Tableau de bord web protégé par mot de passe, avec l’état en direct du GPU, du serveur LLM et des services, accessible à distance via un tunnel zero-trust (Twingate)."
         ],
-        "method": "J’ai conçu et piloté le système : spécifications détaillées, revue de chaque modification par pull request GitHub (plus de 40 PR), tests sur données réelles et diagnostic des pannes à partir des logs. Le développement lui-même a été assisté par IA.",
+        "method": "J’ai conçu et piloté le système de bout en bout : spécifications, revue de chaque modification et tests sur de vrais chapitres. Le développement lui-même a été assisté par IA avec Claude Code.",
         "tech": [
           "Python",
-          "FastAPI",
           "ffmpeg",
-          "Modèles IA (vision, TTS)",
-          "YouTube Data API v3",
-          "OAuth"
+          "API LLM (vision + texte)",
+          "Edge-TTS",
+          "YouTube Data API",
+          "Interface web"
         ]
       },
       {
-        "title": "Home lab & outillage",
+        "title": "Silence Cutter",
         "meta": "Projet personnel",
-        "context": "Infrastructure personnelle pour héberger des modèles IA et des services, accessible à distance sans exposition Internet.",
+        "context": "Paquet Python réutilisable qui détecte et supprime les blancs dans les vidéos narrées.",
         "did": [
-          "Modèles IA locaux sur GPU et passerelle multi-fournisseurs.",
-          "Services Docker et accès distant zero-trust via Twingate, sans exposition Internet.",
-          "Utilitaire CLI de suppression des silences dans les vidéos (ffmpeg).",
-          "Panneau de contrôle Windows avec supervision temps réel."
+          "Utilisé comme dépendance par le pipeline de résumés pour resserrer automatiquement le rythme."
         ],
+        "method": "Conçu et piloté par moi ; réalisé en développement assisté par IA (Claude Code).",
         "tech": [
-          "Docker",
-          "Twingate",
           "Python",
-          "ffmpeg",
-          "Windows"
+          "ffmpeg"
+        ]
+      },
+      {
+        "title": "Desktop Launcher",
+        "meta": "Projet personnel",
+        "context": "Application desktop Windows qui démarre et supervise tout mon poste de travail IA depuis un seul endroit.",
+        "did": [
+          "Contrôle en un clic de la passerelle, de l’interface web du pipeline, de LM Studio (choix du modèle, taille de contexte, chargement/déchargement) et de Claude Code selon trois modes : cloud, modèle local et passerelle.",
+          "Supervision en direct de la RAM, de la VRAM, de l’usage GPU, du contexte et de la vitesse de génération, avec une option de démarrage avec Windows."
+        ],
+        "method": "Conçu et piloté par moi ; réalisé en développement assisté par IA (Claude Code).",
+        "tech": [
+          "Python",
+          "Desktop Windows",
+          "LM Studio",
+          "Supervision GPU"
+        ]
+      },
+      {
+        "title": "Environnement de code IA local",
+        "meta": "Projet personnel",
+        "context": "Outils PowerShell pour exécuter Claude Code sur un LLM local ou via une passerelle multi-fournisseurs, pour un développement assisté par IA hors ligne ou à faible coût.",
+        "did": [
+          "Bascule entre un modèle local (LM Studio) et une passerelle cloud selon le coût et la disponibilité."
+        ],
+        "method": "Conçu et piloté par moi ; réalisé en développement assisté par IA (Claude Code).",
+        "tech": [
+          "PowerShell",
+          "LM Studio",
+          "Passerelle LLM"
+        ]
+      },
+      {
+        "title": "Manhwa Video Maker",
+        "meta": "Projet personnel · En cours",
+        "context": "Expérimentation d’IA image-vers-vidéo pour animer des moments clés de manhwa, comme les combats et les révélations.",
+        "did": [
+          "Prototypage en local sur un seul GPU avec ComfyUI et Wan 2.2 ; GPU cloud loués prévus pour la production."
+        ],
+        "method": "Conçu et piloté par moi ; réalisé en développement assisté par IA (Claude Code).",
+        "tech": [
+          "ComfyUI",
+          "Wan 2.2",
+          "IA image-vers-vidéo"
         ]
       }
     ],
