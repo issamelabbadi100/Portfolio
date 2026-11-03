@@ -258,6 +258,30 @@
           "Zabbix API",
           "CIS Benchmarks"
         ]
+      },
+      {
+        "title": "Geographic Network Topology Map for Multi-Datacenter Monitoring",
+        "meta": "Client environment",
+        "context": "Live geographic network map and supporting dashboards to monitor inter-datacenter links across three sites, combining Zabbix as the data source with a custom Grafana visualisation.",
+        "did": [
+          "Designed and built a geographic network topology map in Grafana, fed directly from a Zabbix monitoring database via SQL.",
+          "Three datacenter sites rendered on a real map, each aggregating its hypervisor cluster health into a single status indicator, with per-node drill-down in the tooltip.",
+          "All 12 physical inter-site fibre links drawn individually rather than as one aggregated line, using computed waypoint geometry to fan parallel cables apart so each stays independently visible and hoverable.",
+          "Per-cable live metrics — receive/transmit throughput, link capacity and a health state derived from traffic thresholds — with colour-coded links (green healthy, red below threshold).",
+          "Complementary Zabbix dashboards aggregating per-trunk throughput, separating LAN and WAN paths, with careful interface aggregation to avoid double-counting bonded and virtual interfaces."
+        ],
+        "method": "Sole designer and implementer.",
+        "tech": [
+          "Grafana",
+          "Zabbix",
+          "MySQL/MariaDB",
+          "SNMP",
+          "SQL",
+          "Proxmox VE",
+          "Network monitoring",
+          "Observability",
+          "Data visualisation"
+        ]
       }
     ],
     "perso": [
