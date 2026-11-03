@@ -283,6 +283,7 @@
           "MySQL/MariaDB",
           "SQL",
           "Grafana",
+          "MapGL",
           "SNMP",
           "Proxmox VE"
         ]
@@ -431,7 +432,7 @@
       },
       "network": {
         "title": "Network map data chain",
-        "desc": "Two sources feed Zabbix: NetBox, the source of truth, and GitLab CI/CD for GitOps automation. Zabbix collects over SNMP and stores in its MySQL/MariaDB database, then Grafana reads that database over SQL and renders the geographic map.",
+        "desc": "Two sources feed Zabbix: NetBox, the source of truth, and GitLab CI/CD for GitOps automation. Zabbix collects over SNMP and stores in its MySQL/MariaDB database, then Grafana reads that database over SQL and renders the map in the MapGL panel.",
         "steps": [
           [
             [
@@ -458,7 +459,7 @@
             "SQL"
           ],
           [
-            "Geographic map",
+            "MapGL",
             "3 sites, 12 fibre links"
           ]
         ],
