@@ -16,8 +16,11 @@
     "github": "https://github.com/issamelabbadi100"
   },
   "cv": {
-    "_note": "Les deux langues pointent vers le CV français. Remplacer par le PDF anglais dans en.json quand il sera prêt.",
-    "href": "cv/CV-Issam-El-Abbadi-FR.pdf"
+    "href": "cv/CV-Issam-El-Abbadi-FR.pdf",
+    "downloadName": "Issam_El_Abbadi_CV_FR.pdf",
+    "altHref": "cv/CV-Issam-El-Abbadi-EN.pdf",
+    "altDownloadName": "Issam_El_Abbadi_CV_EN.pdf",
+    "altLabel": "English version"
   },
   "nav": {
     "skip": "Aller au contenu",
