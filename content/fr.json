@@ -258,6 +258,30 @@
           "Zabbix API",
           "CIS Benchmarks"
         ]
+      },
+      {
+        "title": "Carte géographique de topologie réseau pour supervision multi-datacenters",
+        "meta": "Environnement client",
+        "context": "Carte réseau géographique en direct et tableaux de bord associés pour superviser les liens inter-datacenters sur trois sites, combinant Zabbix comme source de données et une visualisation Grafana sur mesure.",
+        "did": [
+          "Conception et réalisation d’une carte géographique de topologie réseau dans Grafana, alimentée directement par une base de données de supervision Zabbix via SQL.",
+          "Trois sites de datacenter représentés sur une vraie carte, chacun agrégeant l’état de santé de son cluster d’hyperviseurs en un indicateur unique, avec exploration par nœud dans l’infobulle.",
+          "Les 12 liens fibre physiques inter-sites tracés individuellement plutôt qu’en une seule ligne agrégée, avec une géométrie de points de passage calculée pour écarter les câbles parallèles afin que chacun reste visible et survolable.",
+          "Métriques en direct par câble — débit en réception/émission, capacité du lien et état de santé dérivé de seuils de trafic — avec des liens colorés (vert = sain, rouge = sous le seuil).",
+          "Tableaux de bord Zabbix complémentaires agrégeant le débit par trunk, séparant les chemins LAN et WAN, avec un traitement soigné de l’agrégation des interfaces pour éviter de compter deux fois les interfaces bondées et virtuelles."
+        ],
+        "method": "Seul concepteur et réalisateur.",
+        "tech": [
+          "Grafana",
+          "Zabbix",
+          "MySQL/MariaDB",
+          "SNMP",
+          "SQL",
+          "Proxmox VE",
+          "Supervision réseau",
+          "Observabilité",
+          "Visualisation de données"
+        ]
       }
     ],
     "perso": [
