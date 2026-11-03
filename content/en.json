@@ -16,8 +16,11 @@
     "github": "https://github.com/issamelabbadi100"
   },
   "cv": {
-    "_note": "English CV pending: points at the French PDF for now. Swap to cv/CV-Issam-El-Abbadi-EN.pdf once it exists.",
-    "href": "cv/CV-Issam-El-Abbadi-FR.pdf"
+    "href": "cv/CV-Issam-El-Abbadi-EN.pdf",
+    "downloadName": "Issam_El_Abbadi_CV_EN.pdf",
+    "altHref": "cv/CV-Issam-El-Abbadi-FR.pdf",
+    "altDownloadName": "Issam_El_Abbadi_CV_FR.pdf",
+    "altLabel": "Version française"
   },
   "nav": {
     "skip": "Skip to content",
@@ -34,7 +37,7 @@
   "hero": {
     "positioning": "Systems engineer with nearly 5 years running critical production infrastructure, specialised in monitoring and observability (Zabbix, Grafana, Prometheus) and GitOps automation.",
     "cvButton": "Download my CV",
-    "cvHint": "PDF, French",
+    "cvHint": "PDF, English",
     "contactButton": "Get in touch",
     "techLabel": "Key technologies",
     "tech": [
