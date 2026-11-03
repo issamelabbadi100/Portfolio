@@ -148,6 +148,19 @@
           "Access management",
           "Alert monitoring"
         ]
+      },
+      {
+        "name": "AI & automation",
+        "items": [
+          "Python",
+          "ffmpeg",
+          "LLM integration (local + cloud)",
+          "Prompt engineering",
+          "Automation pipelines",
+          "AI-assisted development (Claude Code)",
+          "Windows desktop tooling",
+          "Monitoring & observability"
+        ]
       }
     ]
   },
@@ -246,41 +259,82 @@
     ],
     "perso": [
       {
-        "title": "Automated video production pipeline",
-        "meta": "Personal project",
+        "title": "Manhwa Chapter Chaser",
+        "meta": "Personal project · Flagship",
         "diagram": true,
-        "context": "End-to-end automated system that turns comics into narrated videos, all the way to YouTube publication. More than 200 episodes processed.",
+        "context": "End-to-end pipeline that turns manhwa and webtoon chapters into narrated recap videos for my YouTube channel. Stages run as a queued “conveyor belt”, from raw panels to a published video.",
         "did": [
-          "Six chained stages: image extraction, description by vision models, script generation, text-to-speech, video assembly and YouTube publication (API v3, OAuth).",
-          "Parallel pipeline architecture, automatic recovery after failures, and failover between several AI providers (local GPU and cloud gateway).",
-          "FastAPI operations web interface: queues, real-time tracking and GPU monitoring."
+          "Chained stages: panel download and splitting, vision-LLM panel descriptions, outline, LLM-written narration, Edge-TTS voiceover, and a video build with silence cutting, chapters and thumbnails.",
+          "Per-series memory of characters, arcs and recent events keeps narration consistent across episodes.",
+          "Auto-generates upload metadata (titles, descriptions with chapters and credits, tags, two thumbnails), plus YouTube Shorts and multi-episode compilations.",
+          "Hybrid AI setup: local models alongside cloud models through a multi-provider gateway, with fallbacks and retries when providers rate-limit.",
+          "Password-protected web dashboard with live GPU, LLM-server and service status, reachable remotely through a zero-trust tunnel (Twingate)."
         ],
-        "method": "I designed and directed the system: detailed specifications, review of every change as a GitHub pull request (40+ PRs), testing on real data and diagnosing failures from logs. Development itself was AI-assisted.",
+        "method": "I designed and directed the system end to end: specifications, reviewing every change and testing on real chapters. Development itself was AI-assisted with Claude Code.",
         "tech": [
           "Python",
-          "FastAPI",
           "ffmpeg",
-          "AI models (vision, TTS)",
-          "YouTube Data API v3",
-          "OAuth"
+          "LLM APIs (vision + text)",
+          "Edge-TTS",
+          "YouTube Data API",
+          "Web UI"
         ]
       },
       {
-        "title": "Home lab & tooling",
+        "title": "Silence Cutter",
         "meta": "Personal project",
-        "context": "Personal infrastructure for hosting AI models and services, reachable remotely without exposure to the internet.",
+        "context": "Reusable Python package that detects and removes dead air from narrated videos.",
         "did": [
-          "Local AI models on GPU and a multi-provider gateway.",
-          "Docker services and zero-trust remote access through Twingate, without exposure to the internet.",
-          "CLI utility that removes silences from videos (ffmpeg).",
-          "Windows control panel with real-time monitoring."
+          "Used as a dependency by the recap pipeline to tighten pacing automatically."
         ],
+        "method": "Designed and directed by me; built with AI-assisted development (Claude Code).",
         "tech": [
-          "Docker",
-          "Twingate",
           "Python",
-          "ffmpeg",
-          "Windows"
+          "ffmpeg"
+        ]
+      },
+      {
+        "title": "Desktop Launcher",
+        "meta": "Personal project",
+        "context": "Windows desktop app that starts and monitors my whole AI workstation from one place.",
+        "did": [
+          "One-click control of the gateway, the pipeline web UI, LM Studio (model picker, context size, load/unload) and Claude Code across three modes: cloud, local model and gateway.",
+          "Live monitoring of RAM, VRAM, GPU usage, context use and generation speed, with a start-with-Windows option."
+        ],
+        "method": "Designed and directed by me; built with AI-assisted development (Claude Code).",
+        "tech": [
+          "Python",
+          "Windows desktop",
+          "LM Studio",
+          "GPU monitoring"
+        ]
+      },
+      {
+        "title": "Local AI coding setup",
+        "meta": "Personal project",
+        "context": "PowerShell tooling to run Claude Code against a local LLM or a multi-provider gateway, for offline or low-cost AI-assisted development.",
+        "did": [
+          "Switches between a local model (LM Studio) and a cloud gateway depending on cost and availability."
+        ],
+        "method": "Designed and directed by me; built with AI-assisted development (Claude Code).",
+        "tech": [
+          "PowerShell",
+          "LM Studio",
+          "LLM gateway"
+        ]
+      },
+      {
+        "title": "Manhwa Video Maker",
+        "meta": "Personal project · In progress",
+        "context": "Experimenting with image-to-video AI to animate key manhwa moments such as fights and reveals.",
+        "did": [
+          "Prototyping locally on a single GPU with ComfyUI and Wan 2.2; rented cloud GPUs planned for production."
+        ],
+        "method": "Designed and directed by me; built with AI-assisted development (Claude Code).",
+        "tech": [
+          "ComfyUI",
+          "Wan 2.2",
+          "Image-to-video AI"
         ]
       }
     ],
