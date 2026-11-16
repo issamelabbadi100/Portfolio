@@ -5,7 +5,7 @@ const other = t.lang === 'fr' ? { lang: 'en', href: `${base}en/` } : { lang: 'fr
 const links = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
 ---
 <a class="skip-link" href="#main">{t.nav.skip}</a>
-<header class="site-header">
+<header class="site-header" transition:persist="site-header">
   <div class="wrap bar">
     <a class="brand mono" href="#top">
       <span class="prompt" aria-hidden="true">~/</span>{t.profile.name}
