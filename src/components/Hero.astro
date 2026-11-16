@@ -14,10 +14,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     {t.profile.location}
   </p>
   <div class="actions">
-    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download>
+    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download={t.cv.downloadName}>
       {t.hero.cvButton} <span class="hint">({t.hero.cvHint})</span>
     </a>
     <a class="btn btn-secondary" href="#contact">{t.hero.contactButton}</a>
+    <a class="cv-alt" href={`${base}${t.cv.altHref}`} download={t.cv.altDownloadName}>{t.cv.altLabel}</a>
   </div>
   <dl class="facts" aria-label={t.hero.factsLabel}>
     {t.hero.facts.map((f) => (
@@ -54,6 +55,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     margin-block: 1.5rem 2rem;
   }
   .hint { font-weight: 400; opacity: 0.8; }
+  .cv-alt {
+    align-self: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .cv-alt:hover, .cv-alt:focus-visible { color: var(--accent); text-decoration: underline; }
   .facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

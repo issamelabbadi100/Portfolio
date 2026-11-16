@@ -46,7 +46,7 @@ const channels = [
       ))}
     </ul>
     <p class="visually-hidden" aria-live="polite" data-copy-status></p>
-    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download>
+    <a class="btn btn-primary" href={`${base}${t.cv.href}`} download={t.cv.downloadName}>
       {c.cvButton} <span class="hint">({t.hero.cvHint})</span>
     </a>
   </div>
